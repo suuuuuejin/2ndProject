@@ -1,0 +1,38 @@
+/* rank 페이지 버튼 관련 start*/
+.rank-cate-bt-hb{
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%; 
+}
+.rank-cate-box-hb{
+    padding: 0;
+}
+.rank-cate-flex-hb{
+    justify-content :center;
+}
+.rank-cate-hb{
+    padding: 10px 15px;
+}
+.rank-type-hb{
+    justify-content :center;
+}
+.rank-type-ul-hb{
+    justify-content :center;
+    margin-bottom: 0;
+}
+.rank-type-bt-hb{
+    margin: 0 !important;
+    width: 100%; 
+    height : 50px;
+    cursor:pointer;
+
+}
+.rank-sec-hb{
+    margin-top: 25px !important;
+}  
+.rank-cate-sec-hb{
+    padding-top: 10px !important;
+
+}
+/* rank 페이지 버튼 관련 end */
