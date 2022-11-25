@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.5.2
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2017 Daniel Eden
+ */
+.slim-menubar-hb{
+            min-width: 300px !important;
+        }
+.wd-250-hb{
+    width: 280px !important;
+		}
+.my-hd-top-hb{
+    border-bottom: 1px !important;
+}
+
+
+#myheader-hb > .header-top-ptb-1{
+    border-bottom: 1px solid #eee !important;
+    background-image: url(topbar-bg.jpg);
+}
