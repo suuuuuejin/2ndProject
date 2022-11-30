@@ -23,6 +23,10 @@ public class TestController {
 		return "rank/rank";
 	}
 	
+	@GetMapping("/")
+	public String test() {
+		return "mypage/mypage";
+	}
 	
 	
 }

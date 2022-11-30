@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+	 <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+	 	
+	 <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                </div>
+            </div>
+        </div>
+        
+        <section class="mt-50 mb-50 ">
+            <div class="container">
+                <div class="row flex-center-hb">
+                	<div class="flex-center-hb">
+                		<h2>이지은님의 피부 MBTI 결과</h2>                	
+                	</div>
+                    <div class="col-lg-12 flex-center-hb">
+						<div class="col-lg-10 col-md-4 skin-wrap-hb resultbox-hb">
+							<!-- 차트 박스 start-->
+							<div id="result-chart-hb" >
+							</div>
+							<!-- 차트 박스 end -->
+							
+							<div class="result-mbtibox-hb">
+								
+							</div>
+						</div>
+						<div class="detail-bt-hb">
+						 진단 결과 상세 보기
+						</div>
+						<div class="col-lg-10 col-md-4 skin-wrap-hb">
+							<div class="result-detailbox-hb">
+								<p class="result-detailtext-hb">
+								그러나 시간이 지나도 아물지 않는 일들이 있지<br/>
+								내가 날 온전히 사랑하지 못해서 맘이 가난한 밤이야<br/>
+								거울 속에 마주친 얼굴이 어색해서 습관처럼 조용히 눈을 감아<br/>
+								밤이 되면 서둘러 내일로 가고 싶어<br/>
+								수많은 소원 아래 매일 다른 꿈을 꾸던 아이는<br/> 
+								그렇게 오랜 시간 겨우 내가 되려고 아팠던 걸까<br/>
+								쌓이는 하루만큼 더 멀어져<br/>
+								우리는 화해할 수 없을 것 같아 나아지지 않을 것 같아<br/>
+								어린 날 내 맘엔 영원히 가물지 않는 바다가 있었지<br/>								
+								이제는 흔적만이 남아 희미한 그곳엔<br/>
+								설렘으로 차오르던 나의 숨소리와 머리 위로 선선히 부는 바람<br/>								
+								파도가 되어 어디로든 달려가고 싶어<br/>
+								작은 두려움 아래 천천히 두 눈을 뜨면<br/>
+								세상은 그렇게 모든 순간 내게로 와 눈부신 선물이 되고<br/>
+								숱하게 의심하던 나는 그제야 나에게 대답할 수 있을 것 같아<br/>
+								선 너머에 기억이 나를 부르고 있어<br/>
+								아주 오랜 시간 동안 잊고 있던 목소리에 물결을 거슬러 나 돌아가<br/>
+								내 안의 바다가 태어난 곳으로 휩쓸려 길을 잃어도 자유로와<br/>
+								더이상 날 가두는 어둠에 눈 감지 않아<br/>
+								두 번 다시 날 모른 척 하지 않아<br/>
+								그럼에도 여전히 가끔은 삶에게 지는 날들도 있겠지<br/>
+								또다시 헤매일지라도 돌아오는 길을 알아<br/>
+
+								
+								</p>
+							</div>				
+						</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- 차트 관련 script -->
+	<script type="text/javascript">
+    var dom = document.getElementById('result-chart-hb');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: ''
+  },
+  legend: {
+    data: ['피부진단1', '피부진단2']
+  },
+  radar: {
+    // shape: 'circle',
+    indicator: [
+      { name: '유분', max: 6500 },
+      { name: '수분', max: 16000 },
+      { name: '색소', max: 30000 },
+      { name: '주름', max: 38000 },
+      { name: '트러블', max: 52000 },
+      { name: '민감성', max: 25000 }
+    ]
+  },
+  series: [
+    {
+      name: 'Budget vs spending',
+      type: 'radar',
+      data: [
+        {
+          value: [4200, 3000, 20000, 35000, 50000, 18000],
+          name: 'Allocated Budget'
+        },
+        {
+          value: [5000, 14000, 28000, 26000, 42000, 21000],
+          name: 'Actual Spending'
+        }
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+</html>

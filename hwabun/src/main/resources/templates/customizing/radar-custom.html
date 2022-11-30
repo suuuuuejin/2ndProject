@@ -1,0 +1,173 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=radar-custom&code=PYBwLglsB2AEC8sDeAoWsDGwA2wBOAXLANoDkAxAGwDsAYgJwAiAHKQDSwW20CiALAGY-7TuQCslAIIDaARhFcGs6gGFSAXTZpYkMNgCmRVOnRh9ADzBFSgHlXAAb2wAsgCEAKgElYgBprAPzWltAL5a6AYA5vrQACZGQdp4AIaR8YQk2ujGJugQURAY8WD4RMRpmcg6FlacgBhDgCG9pLCxpSZI5ZbWgATjdQ3BTWVmbZyAkwOAMYP1jb0t_ZWkgD8TgCGdYz1NkxXWgB1LgDftgCh9YyXomnuYEWYpZABMYgCkCmIADNcHTQmREACuAM5Esme3SybvYGSYEk0FCBiI9F-h3eIGwEDAADlXgBbABG-hSfD-6HeAAt4iBDJwMBA8BgDOxDvFzBB3gj4siiRkmgAzfDI_InayABAYkAA3eLYV76AKARAZKb1MDhCqI-GdmM5GMJDuNMjC4cC8Pp4kZDuhktqAMpgACe4OQepMWFwpwo1GoPEkjFoCnIZ0oKgEzh4rsofEkvHorrlCqVGmxpTxiWAAHcVNKUqQ8KFUfEABS_WCZ7MAOjOAEoJZLYFHIrHnEKUrJbpaAiqI9TaQAZbJMy1w6D6Y1mtvFqU26zJ1Nps6yWQcC4CCd3Di3HPMQu1-vQ2Hwlud3WSjtd03m5m9a0ypMp9Oj8ewSfT3ML_ySutNe8mVUWprZF55AqnS0rAakToiDlzC-O5um_VpplqADqWA25QMlH9phGKCgNgWQQOfTIEOseZkK-H44ImcD1m2XDUNuZgCOWIjOEAH-7AAQawBGQdI6gzgaQ5HlKDBjgxIpSGoK4bnucNDmeN5PlQn4GxpOkGV7A8E2scgWWUosmlTDAAGtQjwYBXiieMB1EShjNU0pUXwSIMQAJUSMSiCnS0QESF5QSKKdYDEdQVRKR8OPeDEIH0cTikww5TUJQdEmSUz0H0ZEQHxd5aU3Xpt27PdLXQGMIEiMBcSIPglwfCMkkBIpv0y2ABSFIliGrTNmFnHMsVgABaZhMx-W5bg4yVoFk6xGHyeJYEkW9egw5pKuq4UikoTMxCa9zWvqjg0O63ren6xlBuG2BnBi0oDXidK5L7Q9EyHU8xEWi95Q4MQziayhFz7R8H3Yny_n3UwTQizhnmiiNAbwdwogsL4SuG8r4OmwVZpIb5MzHRrUIEZHuo4eh6A4ageojTJtqJUghsBWA1AJ_4TTRHBB30DAwEOtVqfM7BDQgAAvIlvkpkJW1OlK-3C4mkjxfRInGu9edgbB4nRbBBeLPFYyIMA8GFaX0DZPAOTALlYBZPSGagOA0ychJkXefMXz7EwtTAV48Dgc2GXeHMZv0ABuSr0Heiba0pn7Sg9opVtgeh3JncPMzxjh5s2poid2snGCZkxjoFm3zoU2BOxjWB6fxPAwDd7SCVxXIcxsl5BQAcVE44Mxzc850oNaOBC230h9zic-PYcLlu2Q-CHs4WrnWRC010pgGU_zKhrLvfen7ul6tPurpHG61pHtax6a-gp57zJZ5ZeevmPtiu_UfNKr9zJ79gLyH-0LyAk9oA
+	⚠ Please be aware that this chart is not an official demo of Apache ECharts but is made by user-generated code.
+-->
+<!DOCTYPE html>
+<html lang="ko" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  color: ['#67F9D8', '#FFE434', '#56A3F1', '#FF917C'],
+  title: {
+    text: '피부 MBTI 결과'
+  },
+  legend: {},
+  radar: [
+    {
+      indicator: [
+        { text: '수분' },
+        { text: '유분' },
+        { text: '색소' },
+        { text: '주름' },
+        { text: '트러블' }
+      ],
+      center: ['25%', '50%'],
+      radius: 120,
+      startAngle: 90,
+      splitNumber: 4,
+      shape: 'circle',
+      axisName: {
+        formatter: '【{value}】',
+        color: '#428BD4'
+      },
+      splitArea: {
+        areaStyle: {
+          color: ['#77EADF', '#26C3BE', '#64AFE9', '#428BD4'],
+          shadowColor: 'rgba(0, 0, 0, 0.2)',
+          shadowBlur: 10
+        }
+      },
+      axisLine: {
+        lineStyle: {
+          color: 'rgba(211, 253, 250, 0.8)'
+        }
+      },
+      splitLine: {
+        lineStyle: {
+          color: 'rgba(211, 253, 250, 0.8)'
+        }
+      }
+    },
+    {
+      indicator: [
+        { text: '유분', max: 150 },
+        { text: '수분', max: 150 },
+        { text: '색소', max: 150 },
+        { text: '주름', max: 120 },
+        { text: '트러블', max: 108 },
+        { text: '민감성', max: 72 }
+      ],
+      center: ['75%', '50%'],
+      radius: 120,
+      axisName: {
+        color: '#fff',
+        backgroundColor: '#666',
+        borderRadius: 3,
+        padding: [3, 5]
+      }
+    }
+  ],
+  series: [
+    {
+      type: 'radar',
+      emphasis: {
+        lineStyle: {
+          width: 4
+        }
+      },
+      data: [
+        {
+          value: [100, 8, 0.4, -80, 2000],
+          name: 'Data A'
+        },
+        {
+          value: [60, 5, 0.3, -100, 1500],
+          name: 'Data B',
+          areaStyle: {
+            color: 'rgba(255, 228, 52, 0.6)'
+          }
+        }
+      ]
+    },
+    {
+      type: 'radar',
+      radarIndex: 1,
+      data: [
+        {
+          value: [120, 118, 130, 100, 99, 70],
+          name: 'Data C',
+          symbol: 'rect',
+          symbolSize: 12,
+          lineStyle: {
+            type: 'dashed'
+          },
+          label: {
+            show: true,
+            formatter: function (params) {
+              return params.value;
+            }
+          }
+        },
+        {
+          value: [100, 93, 50, 90, 70, 60],
+          name: 'Data D',
+          areaStyle: {
+            color: new echarts.graphic.RadialGradient(0.1, 0.6, 1, [
+              {
+                color: 'rgba(255, 145, 124, 0.1)',
+                offset: 0
+              },
+              {
+                color: 'rgba(255, 145, 124, 0.9)',
+                offset: 1
+              }
+            ])
+          }
+        }
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

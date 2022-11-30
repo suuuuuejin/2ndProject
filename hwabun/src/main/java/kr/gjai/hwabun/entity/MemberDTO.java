@@ -1,8 +1,14 @@
 package kr.gjai.hwabun.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberDTO {
 	
 	private String mb_id; // 회원 아이디
@@ -18,6 +24,6 @@ public class MemberDTO {
 	private String mb_profile; // 회원 프로필사진
 	private String mb_joindate; // 회원 가입일자
 	private char mb_type; // 회원 유형
-	
+	private String mb_name; // 회원 이름
 	
 }

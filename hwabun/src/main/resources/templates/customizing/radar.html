@@ -1,0 +1,86 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=radar&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcya6GOAHmAQOSA8q4AG9sAsgEIAqAkrJUQL4A0RuAOY5oAEwKpisUQEMwMggG1KAQSxZgAYzk5RsJgFdRwsJV6cVmsAZlZYAZRAjREaIMoBdHv3QAnGbK-EkToAPShsADOABYyTlSaEL6auGYhsK4u2mDAQbCK6ehIsNAyALb4nPa2OJFmsGUypAQAbACsAAwdsHyFyCXllaqiZa4QkWD-kDD1jc2wAIwtXd29UkUDFVRs0ABmuY3TcCw4mtHQwBqCAJ6zTQQAzCurPuvFpVucAMIGE8AVvgcBhAIFypnMc0eAA4Vj1XlJ3oMqAARHAANxwGhAFWg4Ia91gbQATLC1m9NkMGDJfABrHCQNx3eZEzpdHrpLzoMmRHC-CC1JTpSTrD5DQzGemwNGRKJOMSudzw4hga7xTj-QJpdbSOQKfJ9IoG4ho2wGSqKAAsJI65ieXXM1vtsAerJthOe5gWMK6HiV2tFVDUGmyun0RhMXG1XL9xGFUalpvNrs9FpWDu9bqJyydVrTsCJCxWvqN6ADFisNjsjmcCsjUe4fU5xAb6C83AA3EA
+	⚠ Please be aware that this chart is not an official demo of Apache ECharts but is made by user-generated code.
+-->
+<!DOCTYPE html>
+<html lang="ko" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '피부 MBTI 결과'
+  },
+  legend: {
+    data: ['피부진단1', '피부진단2']
+  },
+  radar: {
+    // shape: 'circle',
+    indicator: [
+      { name: '유분', max: 6500 },
+      { name: '수분', max: 16000 },
+      { name: '색소', max: 30000 },
+      { name: '주름', max: 38000 },
+      { name: '트러블', max: 52000 },
+      { name: '민감성', max: 25000 }
+    ]
+  },
+  series: [
+    {
+      name: 'Budget vs spending',
+      type: 'radar',
+      data: [
+        {
+          value: [4200, 3000, 20000, 35000, 50000, 18000],
+          name: 'Allocated Budget'
+        },
+        {
+          value: [5000, 14000, 28000, 26000, 42000, 21000],
+          name: 'Actual Spending'
+        }
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

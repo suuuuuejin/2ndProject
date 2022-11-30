@@ -3,7 +3,7 @@
 <th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
 	<th:block th:fragment="content">
 <!-- 여기서부터 작성 -->
-   <main class="main">
+  <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
@@ -18,96 +18,198 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <table class="table shopping-summery text-center clean">
                                 <thead>
                                     <tr class="main-heading">
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Subtotal</th>
-                                        <th scope="col">Remove</th>
+                                        <th scope="col">사진</th>
+                                        <th scope="col">상품명</th>
+                                        <th scope="col">가격</th>
+                                        <th scope="col">수량</th>
+                                        <th scope="col">합계</th>
+                                        <th scope="col">장바구니 제거</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
-                                        <td class="product-des product-name">
-                                            <h5 class="product-name"><a href="shop-product-right.html">J.Crew Mercantile Women's Short-Sleeve</a></h5>
-                                            <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
-                                            </p>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <tr th:each="row:${Basket}" class="Basket">
+                                      <td class="image product-thumbnail"><img th:src="${row.cos_photo1}" alt="#"></td>
+                                 
+                                        <td   class="product-des product-name">
+
+                                            <h5 class="product-name"><a href="shop-product-right.html"></a></h5>
+                                            <p class="font-xs" th:text="${row.cos_name}">상품이름<br>상품이름</p>
+                                            
                                         </td>
-                                        <td class="price" data-title="Price"><span>$65.00 </span></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
+                                        
+                                        
+                                    
+                                        
+                                        <td class="price" data-title="Price" th:text="${row.cos_price}"><span>1개의가격</span></td>
+                                        
+                                        <td class="text-center" data-title="Stock" >
+                                        
+                                        
+                                        
+                                       	 	<div  class="detail-qty border radius  m-auto" >
+                                                
+                                                
+                                                
+                                                <input style="visibility:hidden" th:value="${row.cos_seq}"/>
+                                                 
+                                                <select  class="nine" th:id="|under_${row.cos_seq}|" style="visibility:visible; float:left;margin-right:5px ;width:45px;height:42px;" >
+   													 <option class="qty-option"  value="1"  style="width:20px">1</option>
+   													 <option class="qty-option"  value="2"  style="width:20px">2</option>
+   													 <option class="qty-option"  value="3"  style="width:20px">3</option>
+   													 <option class="qty-option"  value="4"  style="width:20px">4</option>
+   													 <option class="qty-option"  value="5"  style="width:20px">5</option>
+   													 <option class="qty-option"  value="6"  style="width:20px">6</option>
+   													 <option class="qty-option"  value="7"  style="width:20px">7</option>
+   													 <option class="qty-option"  value="8"  style="width:20px">8</option>
+   													 <option class="qty-option"  value="9"  style="width:20px">9</option>
+   													 <option class="qty-option special"  value="10+" style="width:20px">10+</option>
+												</select>
+												
+												<input type="text" style="visibility:hidden" th:id="|over_${row.cos_seq}|" th:value="${row.cnt}"></input>
+                                               	<button class='end' style="visibility:hidden" th:id="|btn_${row.cos_seq}|"></button>
+                                               	
+                                               	<!-- <p th:text="${row.cnt}" th:value="${row.cnt}" style="width:45px;height:42px;visibility:hidden">
+                                               			<input th:value="${row.cnt}" />
+                                               	</p>
+                                                
+                                                 -->
+                                                
+                                                
+                                                
+                                                
+                                       		</div>
                                         </td>
-                                        <td class="text-right" data-title="Cart">
-                                            <span>$65.00 </span>
+                                        
+                                        <td  class="text-right"  data-title="Cart" th:text="${row.price}">
+                                            <span>총가격</span>
+                                            <input style="visibility:hidden" class="sum" th:value="${row.price}">
+                                            
                                         </td>
-                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                                        
+                                        <td class="action" data-title="Remove">
+                                        
+                                        	<!-- 
+                                        	 <a href="#" class="text-muted"  style="visibility : hidden">
+                                                                                         
+                                        
+                                        		<i class="fi-rs-trash"></i>
+                                        
+                                 
+                                        	</a> -->
+                                        	
+                                        	
+                                        	
+                                        	<a href="#" class="throw">
+                                        	
+                                        	<img th:src="@{/assets/imgs/shop/dh_bin.png}" style="width:20px; height:20px;"/>
+                                        	<input th:class="cos_seq" type="hidden" th:value="${row.cos_seq}"/>
+                                        	<input th:class="_cnt" type="hidden" th:value="${row.cnt}"/>
+                                        	</a>
+                                        
+                                        
+                                        
+                                        
+                                        </td>
+                                    
+                                    <td class="text-right" data-title="Cart" th:id="cos_seq" th:value="${row.cos_seq}" >
+                                    
+                                            <span></span>
+                                        </td>
+                                    
                                     </tr>
-                                    <tr>
-                                        <td class="image"><img src="assets/imgs/shop/product-11-2.jpg" alt="#"></td>
-                                        <td class="product-des">
-                                            <h5 class="product-name"><a href="shop-product-right.html">Amazon Essentials Women's Tank</a></h5>
-                                            <p class="font-xs">Sit at ipsum amet clita no est,<br> sed amet sadipscing et gubergren</p>
-                                        </td>
-                                        <td class="price" data-title="Price"><span>$75.00 </span></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">2</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" data-title="Cart">
-                                            <span>$150.00 </span>
-                                        </td>
-                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="image"><img src="assets/imgs/shop/product-6-1.jpg" alt="#"></td>
-                                        <td class="product-des">
-                                            <h5 class="product-name"><a href="shop-product-right.html">Amazon Brand - Daily Ritual Women's Jersey </a></h5>
-                                            <p class="font-xs">Erat amet et et amet diam et et.<br> Justo amet at dolore
-                                            </p>
-                                        </td>
-                                        <td class="price" data-title="Price"><span>$62.00 </span></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" data-title="Cart">
-                                            <span>$62.00 </span>
-                                        </td>
-                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                                    </tr>
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                 
+                                    
+                                    
+                                    
+                                    
+                                    
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                       
+                                   
+                                   
+                                   
+                                   
+                                   
                                     <tr>
                                         <td colspan="6" class="text-end">
-                                            <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
+                                        
+                                          <a href="#" class="text-muted" id="clear"> 
+                                         
+                                          <i class="fi-rs-cross-small"></i> 장바구니 모두 비우기
+                                          
+                                          </a>
+                                            
+                                            
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
-                            <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                           <!--  <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10" ></i>Update Cart</a> -->
+                            <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>쇼핑 계속하기</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
                             <div class="col-lg-6 col-md-12">
-                                <div class="heading_s1 mb-3">
+                           <!--     <div class="heading_s1 mb-3">
                                     <h4>Calculate Shipping</h4>
                                 </div>
-                                <p class="mt-15 mb-30">Flat rate: <span class="font-xl text-brand fw-900">5%</span></p>
+                                 <p class="mt-15 mb-30">Flat rate: <span class="font-xl text-brand fw-900">5%</span></p> 
                                 <form class="field_form shipping_calculator">
                                     <div class="form-row">
                                         <div class="form-group col-lg-12">
@@ -375,22 +477,22 @@
                                             <button class="btn  btn-sm"><i class="fi-rs-shuffle mr-10"></i>Update</button>
                                         </div>
                                     </div>
-                                </form>
+                                </form>-->
                                 <div class="mb-30 mt-50">
-                                    <div class="heading_s1 mb-3">
+                                 <!--    <div class="heading_s1 mb-3">
                                         <h4>Apply Coupon</h4>
-                                    </div>
+                                    </div> -->
                                     <div class="total-amount">
                                         <div class="left">
                                             <div class="coupon">
                                                 <form action="#" target="_blank">
                                                     <div class="form-row row justify-content-center">
-                                                        <div class="form-group col-lg-6">
+                                                       <!--  <div class="form-group col-lg-6">
                                                             <input class="font-medium" name="Coupon" placeholder="Enter Your Coupon">
                                                         </div>
                                                         <div class="form-group col-lg-6">
                                                             <button class="btn  btn-sm"><i class="fi-rs-label mr-10"></i>Apply</button>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </form>
                                             </div>
@@ -401,27 +503,27 @@
                             <div class="col-lg-6 col-md-12">
                                 <div class="border p-md-4 p-30 border-radius cart-totals">
                                     <div class="heading_s1 mb-3">
-                                        <h4>Cart Totals</h4>
+                                        <h4>총합</h4>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <tbody>
-                                                <tr>
+                                           <tbody>
+                                              <!--   <tr>
                                                     <td class="cart_total_label">Cart Subtotal</td>
                                                     <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">$240.00</span></td>
                                                 </tr>
-                                                <tr>
+                                                 <tr>
                                                     <td class="cart_total_label">Shipping</td>
                                                     <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free Shipping</td>
-                                                </tr>
+                                                </tr> -->
                                                 <tr>
-                                                    <td class="cart_total_label">Total</td>
-                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">$240.00</span></strong></td>
+                                                    <td class="cart_total_label" id="sumtotal">총합</td>
+                                                    <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand" ></span></strong></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <a href="#" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                                    <a href="#" class="btn "> <i class="fi-rs-box-alt mr-10"></i>구매하러 가기</a>
                                 </div>
                             </div>
                         </div>
@@ -430,10 +532,383 @@
             </div>
         </section>
     </main>
-    
-    
-    
+  
 <!-- 여기까지 입력 -->
 	</th:block>
 	</th:block>
+	
+	
+	  
+    <script type="text/javascript">
+    
+    
+    $(document).ready(function(){   
+
+    	var arr1=[];
+    	var arr2=[];
+    	var cosseqs=$('.cos_seq');
+    	var loop=cosseqs.length;
+    	
+    	for(var i = 0 ; i < cosseqs.length; i++){
+		
+    		
+    		arr1.push(cosseqs[i].value);
+    		
+    
+    	}    	
+    	
+		
+    	
+    	
+    	var cnts=$('._cnt');
+    	
+		for(var i = 0 ; i < cnts.length; i++){
+			
+			
+			arr2.push(cnts[i].value);
+			
+			
+			
+			
+		}
+		
+
+		console.log(loop);
+		console.log(arr1);
+		console.log(arr2);
+		
+		
+		for(var i=0;i<loop;i++){
+			
+			
+			if(arr2[i]<10){
+				
+				
+			console.log("10미만")
+			
+			var seq=arr1[i];
+			var cnt=arr2[i];
+			console.log(cnt);
+			$('#under_'+seq+' > option[value='+cnt+']').attr('selected',true);
+			
+			
+			
+			//console.log($('select[value='+seq+']>option[@value='+cnt+']'));
+			//$('select[value='+seq+']>option[@value='+cnt+']').attr('selected',true);	
+				
+	
+			}else{
+				var seq=arr1[i];
+				var cnt=arr2[i];
+				
+				$('#under_'+seq).css('visibility','hidden');
+				$('#over_'+seq).text(cnt);
+				$('#over_'+seq).css('visibility','visible');
+				$('#btn_'+seq).css('visibility','visible');
+					
+				
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+		var sumtotal=$(".sum");
+		arr3=[];
+		console.log(sumtotal.length)
+		for(var i=0;i<sumtotal.length;i++){
+			
+			console.log(sumtotal[i]);
+			
+		}
+		
+		
+		
+		
+		
+		//ready ready ready ready 
+		
+		
+		$(".nine").click(function(){
+			
+			var cnt=$(this).val();
+			
+			
+			
+			if(cnt=='10+'){
+
+			$(this).css('visibility','hidden')
+			$(this).next().css('visibility','visible')
+			$(this).next().next().css('visibility','visible')
+			}
+			else{
+
+				$("#cnt").text(cnt);
+				var cos_seq=$(this).prev().val();
+	        	
+			 	$.ajax({
+					
+					
+					url : '/changeCnt',
+					data : {
+
+					'cos_seq':cos_seq,
+					'cnt':cnt
+						
+						
+					},
+					
+				
+					success : function(res){
+					// res --> 응답내용을 담는 변수
+					console.log(res);
+					console.log("success");
+					
+				},
+				error : function(){
+					console.log("error!error!error!");
+				}
+
+				
+			});
+				
+				
+			}
+			
+			
+		})
+		//nine 끝
+		
+		//end 시작
+		
+		$(".end").click(function(){
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		})
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        //throw click 시작 
+        
+  
+    $(".throw").click(function(){
+      
+     
+     
+      
+     var cos_seq=$(this).find("input").text();
+    
+     	
+     //
+    
+     $(this).parent().parent().empty();
+     
+     
+       //
+       
+       
+       
+       $.ajax({
+        		
+        		
+        		url : '/throwSeq',
+        		data : {
+
+        		'cos_seq':cos_seq
+        		
+        			
+        			
+        		},
+        		
+        	
+        		success : function(res){
+    			// res --> 응답내용을 담는 변수
+    			console.log(res);
+    			console.log("success");
+    			
+    		},
+    		error : function(){
+    			console.log("error!error!error!");
+    		}
+    		
+        	
+        		
+        });
+       
+       
+       
+
+       
+        
+		//ajax	
+			
+		
+		
+		
+		
+		
+    });
+        // throw click 끝
+        
+        
+        
+     
+       //clear click 시작 
+
+     $("#clear").click(function(){
+      
+    	 $('#countBasket').text(0);
+    	 
+    	 $(".Basket").empty();
+     
+    
+   //
+			
+        
+		//ajax	
+
+		
+		
+		
+		
+    });
+        
+        
+     //clear click 끝   
+        
+        
+ 
+        
+     //cntChange 시작 
+        
+
+     $(".changeCnt").click(function(){
+      
+     
+     
+    	 //var originprice=$(this).parent().parent().prev().text();     
+         
+ 
+    	 //var total=originprice*cntt;
+    	       
+    	 //$(this).parent().parent().next().text(total);
+    	 
+   	var originprice=$(this).parent().prev().text();     
+        
+       
+ 	var cnt=$(this).prev().find("p").text();
+ 	
+ 	
+ 	
+ 	var total=originprice*cnt;
+    
+ 	$(this).parent().next().text(total);
+ 	
+ 	
+ 	var cos_seq=$(this).prev().eq(0).find('input').val();
+    	 
+       //
+ 	
+        	
+ 	$.ajax({
+		
+		
+		url : '/changeCnt',
+		data : {
+
+		'cos_seq':cos_seq,
+		'cnt':cnt
+			
+			
+		},
+		
+	
+		success : function(res){
+		// res --> 응답내용을 담는 변수
+		console.log(res);
+		console.log("success");
+		
+	},
+	error : function(){
+		console.log("error!error!error!");
+	}
+
+	
+});
+	//
+		
+    });
+        
+        
+ 
+       //changeCnt 끝 
+        
+       
+       //countBasket 시작 
+       
+       
+     
+     
+     $.ajax({
+ 		
+ 		url : '/countBasket',
+ 		data : {
+ 		'count':'count'
+ 		},
+ 		
+ 		success : function(res){
+ 		// res --> 응답내용을 담는 변수
+ 		console.log(res);
+ 		console.log("success");
+ 		
+ 	},
+ 	error : function(){
+ 		console.log("error!error!error!");
+ 	}
+ 	
+ 	
+
+ }).done(
+ 		
+ (data)=>{
+ 	
+ console.log(data);
+
+ $('#countBasket').text(data);	
+ 	
+ }
+ );
+        
+        
+        //countBasket 끝 
+        
+        
+
+    });
+    
+ 
+</script>
+    
 </html>

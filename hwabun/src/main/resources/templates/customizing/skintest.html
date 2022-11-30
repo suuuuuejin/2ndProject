@@ -1,0 +1,778 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+	
+	
+	
+	<main class="main">
+        <div class="page-header breadcrumb-wrap">
+			<div class="breadcrumb">
+			</div>
+        </div>
+        <section class="mt-50 mb-50 ">
+
+			<form>
+
+				<!-- test시작 start -->
+		        <div id="test0-hb" class="col-lg-12">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">0</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">워밍업</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/medical-records.png"  alt="">
+		                        </div>
+		                        <div class="test-start-hb">
+		                            <p class="start-text-hb">피부 진단을 시작하겠습니다</p>
+		                        	<button type="button" class="btn btn-primary start-bt-hb" onclick='nextPage(0)' >시작하기</button>
+		                        </div>
+		                        
+		                        
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- test시작 end -->
+
+
+				<!-- 질문1 start -->
+		        <div id="test1-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">1</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">유분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                        	
+		                            <img src="assets/imgs/customizing/skincare.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">아침 세안 후 T존(이마와 콧등)의 느낌을 알려주세요</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_1" value="1" onclick='nextPage(1)'> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_2" value="2" onclick='nextPage(1)'> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raS-hb" id="1_3" value="3" onclick='nextPage(1)'> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_4" value="4" onclick='nextPage(1)'> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_5" value="5" onclick='nextPage(1)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">건조 당김이<br/>&emsp;있었다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">건조한 느낌이 없고<br/>유분기가 느껴졌다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문1 end -->
+	
+	
+				<!-- 질문2 start -->
+		        <div id="test2-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">2</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">유분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/oily.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">얼굴 전체의 피부결이 갈라짐 보다 번들거림이 눈에 띄나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna2" class="radio-hb choice-raL-hb" id="2_1" value="1" onclick='nextPage(2)'> 
+		                            <input type="radio" name="qna2" class="radio-hb choice-raM-hb" id="2_2" value="2" onclick='nextPage(2)'> 
+		                            <input type="radio" name="qna2" class="radio-hb choice-raS-hb" id="2_3" value="3" onclick='nextPage(2)'> 
+		                            <input type="radio" name="qna2" class="radio-hb choice-raM-hb" id="2_4" value="4" onclick='nextPage(2)'> 
+		                            <input type="radio" name="qna2" class="radio-hb choice-raL-hb" id="2_5" value="5" onclick='nextPage(2)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&emsp;매우 아니다<br/>&emsp;(갈라짐이<br/>&emsp;더 눈에 띔)</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다<br/>&emsp;&emsp;(번들거림이<br/>&emsp;&emsp;더 눈에 띔)</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문2 end -->        	
+	        
+	        
+				<!-- 질문3 start -->
+		        <div id="test3-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">3</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">색소형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/depressed.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">최근 피부 톤이 비교적 어두워졌나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna3" class="radio-hb choice-raL-hb" id="3_1" value="1" onclick='nextPage(3)'> 
+		                            <input type="radio" name="qna3" class="radio-hb choice-raM-hb" id="3_2" value="2" onclick='nextPage(3)'> 
+		                            <input type="radio" name="qna3" class="radio-hb choice-raS-hb" id="3_3" value="3" onclick='nextPage(3)'> 
+		                            <input type="radio" name="qna3" class="radio-hb choice-raM-hb" id="3_4" value="4" onclick='nextPage(3)'> 
+		                            <input type="radio" name="qna3" class="radio-hb choice-raL-hb" id="3_5" value="5" onclick='nextPage(3)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&emsp;매우 아니다<br/>(어두워지지 않음)</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다<br/>&emsp;&emsp;&nbsp;(어두워짐)</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문3 end -->
+	        
+	
+				<!-- 질문4 start -->
+		        <div id="test4-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">4</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">색소형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/freckles.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">기미, 주근깨, 점 등이 잘 생기는 편이신가요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna4" class="radio-hb choice-raL-hb" id="4_1" value="1" onclick='nextPage(4)'> 
+		                            <input type="radio" name="qna4" class="radio-hb choice-raM-hb" id="4_2" value="2" onclick='nextPage(4)'> 
+		                            <input type="radio" name="qna4" class="radio-hb choice-raS-hb" id="4_3" value="3" onclick='nextPage(4)'> 
+		                            <input type="radio" name="qna4" class="radio-hb choice-raM-hb" id="4_4" value="4" onclick='nextPage(4)'> 
+		                            <input type="radio" name="qna4" class="radio-hb choice-raL-hb" id="4_5" value="5" onclick='nextPage(4)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&emsp;매우 아니다<br/>&nbsp;(생기지 않는다)</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다<br/>&emsp;&emsp;&nbsp;(잘 생긴다)</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문4 end -->        
+	
+	
+				<!-- 질문5 start -->
+		        <div id="test5-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">5</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">수분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/moisturizing.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">오늘 점심 이후, 피부 표면은 번들거리는데 피부 속은 당김이 있었나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna5" class="radio-hb choice-raL-hb" id="5_1" value="1" onclick='nextPage(5)'> 
+		                            <input type="radio" name="qna5" class="radio-hb choice-raM-hb" id="5_2" value="2" onclick='nextPage(5)'> 
+		                            <input type="radio" name="qna5" class="radio-hb choice-raS-hb" id="5_3" value="3" onclick='nextPage(5)'> 
+		                            <input type="radio" name="qna5" class="radio-hb choice-raM-hb" id="5_4" value="4" onclick='nextPage(5)'> 
+		                            <input type="radio" name="qna5" class="radio-hb choice-raL-hb" id="5_5" value="5" onclick='nextPage(5)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&emsp;매우 아니다<br/>&emsp;(속 당김이<br/>&emsp;&emsp;없었다)</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다<br/>&emsp;&nbsp;(유분기가 있으나<br/>&emsp;&nbsp;속 당김이 있음)</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문5 end -->        
+	
+	
+				<!-- 질문6 start -->
+		        <div id="test6-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">6</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">수분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/moisturizing2.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">오늘 아침 세안 후, 얼굴 전체가 건조하게 느껴졌나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna6" class="radio-hb choice-raL-hb" id="6_1" value="1" onclick='nextPage(6)'> 
+		                            <input type="radio" name="qna6" class="radio-hb choice-raM-hb" id="6_2" value="2" onclick='nextPage(6)'> 
+		                            <input type="radio" name="qna6" class="radio-hb choice-raS-hb" id="6_3" value="3" onclick='nextPage(6)'> 
+		                            <input type="radio" name="qna6" class="radio-hb choice-raM-hb" id="6_4" value="4" onclick='nextPage(6)'> 
+		                            <input type="radio" name="qna6" class="radio-hb choice-raL-hb" id="6_5" value="5" onclick='nextPage(6)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문6 end -->
+	
+	
+				<!-- 질문7 start -->
+		        <div id="test7-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">7</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">피부 처짐 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/eye-bags.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">거울을 보았을 때, 노화로 인한 눈가의 피부가 처져있나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna7" class="radio-hb choice-raL-hb" id="7_1" value="1" onclick='nextPage(7)'> 
+		                            <input type="radio" name="qna7" class="radio-hb choice-raM-hb" id="7_2" value="2" onclick='nextPage(7)'> 
+		                            <input type="radio" name="qna7" class="radio-hb choice-raS-hb" id="7_3" value="3" onclick='nextPage(7)'> 
+		                            <input type="radio" name="qna7" class="radio-hb choice-raM-hb" id="7_4" value="4" onclick='nextPage(7)'> 
+		                            <input type="radio" name="qna7" class="radio-hb choice-raL-hb" id="7_5" value="5" onclick='nextPage(7)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다<br/>&nbsp;(주름 없음)</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다<br/>&emsp;&emsp;(주름 많음)</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문7 end -->
+	
+	
+				<!-- 질문8 start -->
+		        <div id="test8-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">8</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">피부 처짐 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/wrinkle.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">거울을 보았을 때, 입가에 노화로 인한 굴곡이 진하게 보이나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna8" class="radio-hb choice-raL-hb" id="8_1" value="1" onclick='nextPage(8)'> 
+		                            <input type="radio" name="qna8" class="radio-hb choice-raM-hb" id="8_2" value="2" onclick='nextPage(8)'> 
+		                            <input type="radio" name="qna8" class="radio-hb choice-raS-hb" id="8_3" value="3" onclick='nextPage(8)'> 
+		                            <input type="radio" name="qna8" class="radio-hb choice-raM-hb" id="8_4" value="4" onclick='nextPage(8)'> 
+		                            <input type="radio" name="qna8" class="radio-hb choice-raL-hb" id="8_5" value="5" onclick='nextPage(8)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문8 end -->
+	
+	
+				<!-- 질문9 start -->
+		        <div id="test9-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">9</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">피부 처짐 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/wrinkle1.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">거울을 보았을 때, 볼살이 늘어지고 처져있나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+	                            	<input type="radio" name="qna9" class="radio-hb choice-raL-hb" id="9_1" value="1" onclick='nextPage(9)'> 
+		                            <input type="radio" name="qna9" class="radio-hb choice-raM-hb" id="9_2" value="2" onclick='nextPage(9)'> 
+		                            <input type="radio" name="qna9" class="radio-hb choice-raS-hb" id="9_3" value="3" onclick='nextPage(9)'> 
+		                            <input type="radio" name="qna9" class="radio-hb choice-raM-hb" id="9_4" value="4" onclick='nextPage(9)'> 
+		                            <input type="radio" name="qna9" class="radio-hb choice-raL-hb" id="9_5" value="5" onclick='nextPage(9)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문9 end -->
+	
+	
+				<!-- 질문10 start -->
+		        <div id="test10-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">10</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">피부 처짐 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/wrinkles.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">자고 나면 피부에 눌렸던 자국이 오래가나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna10" class="radio-hb choice-raL-hb" id="10_1" value="1" onclick='nextPage(10)'> 
+		                            <input type="radio" name="qna10" class="radio-hb choice-raM-hb" id="10_2" value="2" onclick='nextPage(10)'> 
+		                            <input type="radio" name="qna10" class="radio-hb choice-raS-hb" id="10_3" value="3" onclick='nextPage(10)'> 
+		                            <input type="radio" name="qna10" class="radio-hb choice-raM-hb" id="10_4" value="4" onclick='nextPage(10)'> 
+		                            <input type="radio" name="qna10" class="radio-hb choice-raL-hb" id="10_5" value="5" onclick='nextPage(10)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문10 end -->
+	
+	
+				<!-- 질문11 start -->
+		        <div id="test11-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">11</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">모공 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/inflammation.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">손으로 레드스팟(트러블)을 짜거나 만지나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna11" class="radio-hb choice-raL-hb" id="11_1" value="1" onclick='nextPage(11)'> 
+		                            <input type="radio" name="qna11" class="radio-hb choice-raM-hb" id="11_2" value="2" onclick='nextPage(11)'> 
+		                            <input type="radio" name="qna11" class="radio-hb choice-raS-hb" id="11_3" value="3" onclick='nextPage(11)'> 
+		                            <input type="radio" name="qna11" class="radio-hb choice-raM-hb" id="11_4" value="4" onclick='nextPage(11)'> 
+		                            <input type="radio" name="qna11" class="radio-hb choice-raL-hb" id="11_5" value="5" onclick='nextPage(11)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문11 end -->
+	
+	
+				<!-- 질문12 start -->
+		        <div id="test12-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">12</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">모공 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/blackhead (1).png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">코 주변 블랙헤드 관리를 적극적으로 하나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna12" class="radio-hb choice-raL-hb" id="12_1" value="1" onclick='nextPage(12)'> 
+		                            <input type="radio" name="qna12" class="radio-hb choice-raM-hb" id="12_2" value="2" onclick='nextPage(12)'> 
+		                            <input type="radio" name="qna12" class="radio-hb choice-raS-hb" id="12_3" value="3" onclick='nextPage(12)'> 
+		                            <input type="radio" name="qna12" class="radio-hb choice-raM-hb" id="12_4" value="4" onclick='nextPage(12)'> 
+		                            <input type="radio" name="qna12" class="radio-hb choice-raL-hb" id="12_5" value="5" onclick='nextPage(12)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문12 end -->
+	
+	
+				<!-- 질문13 start -->
+		        <div id="test13-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">13</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">트러블 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/family.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">가족 중 레드스팟(트러블) 피부를 가진 구성원이 있나요?  </p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna13" class="radio-hb choice-raL-hb" id="13_1" value="1" onclick='nextPage(13)'> 
+		                            <input type="radio" name="qna13" class="radio-hb choice-raM-hb" id="13_2" value="2" onclick='nextPage(13)'> 
+		                            <input type="radio" name="qna13" class="radio-hb choice-raS-hb" id="13_3" value="3" onclick='nextPage(13)'> 
+		                            <input type="radio" name="qna13" class="radio-hb choice-raM-hb" id="13_4" value="4" onclick='nextPage(13)'> 
+		                            <input type="radio" name="qna13" class="radio-hb choice-raL-hb" id="13_5" value="5" onclick='nextPage(13)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문13 end -->
+	
+	
+				<!-- 질문14 start -->
+		        <div id="test14-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">14</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">트러블 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/acne.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">레드스팟(트러블)이 터지고 나서 생긴 붉은 자국이 많나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna14" class="radio-hb choice-raL-hb" id="14_1" value="1" onclick='nextPage(14)'> 
+		                            <input type="radio" name="qna14" class="radio-hb choice-raM-hb" id="14_2" value="2" onclick='nextPage(14)'> 
+		                            <input type="radio" name="qna14" class="radio-hb choice-raS-hb" id="14_3" value="3" onclick='nextPage(14)'> 
+		                            <input type="radio" name="qna14" class="radio-hb choice-raM-hb" id="14_4" value="4" onclick='nextPage(14)'> 
+		                            <input type="radio" name="qna14" class="radio-hb choice-raL-hb" id="14_5" value="5" onclick='nextPage(14)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문14 end -->
+	
+	
+				<!-- 질문15 start -->
+		        <div id="test15-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">15</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">민감 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/sensitive-skin.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">온도 차이나 환경에 따라 붉어짐이나 간지러움을 느끼나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna15" class="radio-hb choice-raL-hb" id="15_1" value="1" onclick='nextPage(15)'> 
+		                            <input type="radio" name="qna15" class="radio-hb choice-raM-hb" id="15_2" value="2" onclick='nextPage(15)'> 
+		                            <input type="radio" name="qna15" class="radio-hb choice-raS-hb" id="15_3" value="3" onclick='nextPage(15)'> 
+		                            <input type="radio" name="qna15" class="radio-hb choice-raM-hb" id="15_4" value="4" onclick='nextPage(15)'> 
+		                            <input type="radio" name="qna15" class="radio-hb choice-raL-hb" id="15_5" value="5" onclick='nextPage(15)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문15 end -->
+	
+	
+				<!-- 질문16 start -->
+		        <div id="test16-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">16</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">민감 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img class="img-hb" src="assets/imgs/customizing/edema.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">화장품 성분에 자주 과민 반응이 일어나나요?</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna16" class="radio-hb choice-raL-hb" id="16_1" value="1" onclick='nextPage(16)'> 
+		                            <input type="radio" name="qna16" class="radio-hb choice-raM-hb" id="16_2" value="2" onclick='nextPage(16)'> 
+		                            <input type="radio" name="qna16" class="radio-hb choice-raS-hb" id="16_3" value="3" onclick='nextPage(16)'> 
+		                            <input type="radio" name="qna16" class="radio-hb choice-raM-hb" id="16_4" value="4" onclick='nextPage(16)'> 
+		                            <input type="radio" name="qna16" class="radio-hb choice-raL-hb" id="16_5" value="5" onclick='nextPage(16)'> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문16 end -->
+	
+	
+				<!-- 질문17 start -->
+		       <!--  <div id="test1-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">1</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">유분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/skincare.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">아침 세안 후 T존(이마와 콧등)의 느낌을 알려주세요</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_1" value="1"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_2" value="2"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raS-hb" id="1_3" value="3"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_4" value="4"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_5" value="5"> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">건조 당김이<br/>&emsp;있었다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">건조한 느낌이 없고<br/>&nbsp;유분기가 느껴졌다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>-->
+	        	<!-- 질문17 end -->
+	
+	
+				<!-- 질문18 start -->
+		       <!--  <div id="test1-hb" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">1</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">유분형 진단</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/skincare.png"  alt="">
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">아침 세안 후 T존(이마와 콧등)의 느낌을 알려주세요</p>
+		                        </div>
+		                        <div class="choice-hb">
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_1" value="1"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_2" value="2"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raS-hb" id="1_3" value="3"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raM-hb" id="1_4" value="4"> 
+		                            <input type="radio" name="qna1" class="radio-hb choice-raL-hb" id="1_5" value="5"> 
+		                        </div>
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">건조 당김이<br/>&emsp;있었다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">건조한 느낌이 없고<br/>&nbsp;유분기가 느껴졌다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>--> 
+	        	<!-- 질문18 end -->
+
+
+			</form>
+
+        </section>
+    </main>
+	
+	
+	
+	</th:block>
+	</th:block>
+	<script type="text/javascript">
+	function nextPage(page){
+		
+		//현재 페이지 닫기 
+		$('#test'+page+'-hb').css("display","none");
+		// 
+		page = page+1 ;
+		$('#test'+page+'-hb').css("display","block");	
+	}
+	
+	
+	$(".radio-hb").on("mouseover",function(){
+		$(".radio-hb").css("background-color","#77948d75");
+	})
+	$(".radio-hb").on("mouseout",function(){
+		$(".radio-hb").css("background-color","#fff");
+	})
+	
+	
+	
+	
+	</script>
+</html>

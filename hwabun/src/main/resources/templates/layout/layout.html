@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="setContent(content)">  
 <head>
     <meta charset="utf-8">
@@ -186,7 +186,8 @@
                                         <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
                                     </ul>
                                 </li> -->
-                                <li><i class="fi-rs-user"></i><a href="page-login-register.html">Log In / </a><a href="page-login-register.html">Sign Up </a></li>
+                                <li th:if = "${session.mvo == null}"><i class="fi-rs-user"></i><a href="/login">Log In/ </a><a href="/join">Sign Up </a></li>
+                                <li th:if = "${session.mvo != null}"><i class="fi-rs-user"></i><a href="/logout.do">Log out </a></li>
                             </ul>
                         </div>
                     </div>
@@ -223,7 +224,7 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">2</span>
+                                        <span id="countBasket"  class="pro-count blue"></span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
@@ -348,14 +349,14 @@
                         <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
-                        <div class="main-categori-wrap d-none d-lg-block">
+                        <div class="main-categori-wrap d-none d-lg-block" id="cate-bt-hb">
                             <a class="categori-button-active open" href="#">
                                 <span class="fi-rs-apps"></span> Categories
                             </a>
-                            <div class="categori-dropdown-wrap categori-dropdown-active-large open">
+                            <div class="categori-dropdown-wrap categori-dropdown-active-large open" id="cate-hb">
                                 <ul>
                                     <li class="has-children">
-                                        <a href="shop-grid-right.html"><i class="evara-font-dress"></i>스킨케어</a>
+                                        <a href="getProductList?cate=스킨케어"><i class="evara-font-dress"></i>스킨케어</a>
                                         <div class="slim-menubar-hb dropdown-menu ">
                                             <ul class="">
                                                 <li class="mega-menu-col col-lg-7">
@@ -446,10 +447,10 @@
                                             </ul>
                                         </div>
                                     </li> -->
-                                    <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>썬크림</a></li>
-                                    <li><a href="shop-grid-right.html"><i class="evara-font-cpu"></i>클렌징</a></li>
+                                    <li><a href="getProductList?cate=썬크림"><i class="evara-font-desktop"></i>썬크림</a></li>
+                                    <li><a href="getProductList?cate=클렌징"><i class="evara-font-cpu"></i>클렌징</a></li>
                                     <li class="has-children">
-                                        <a href="shop-grid-right.html"><i class="evara-font-smartphone"></i> 남성</a>
+                                        <a href="getProductList?cate=남성"><i class="evara-font-smartphone"></i> 남성</a>
                                         <div class="slim-menubar-hb dropdown-menu ">
                                             <ul class="">
                                                 <li class="mega-menu-col col-lg-7">
@@ -528,7 +529,8 @@
                                         <a href="page-about.html">About</a>
                                     </li>
                                     <li>
-                                        <a href="page-about.html">랭킹</a>
+                                    	<a href="getProductList?cate=스킨케어"></a>
+                                        <a href="/rank">랭킹</a>
                                     </li>
                                     
                                     <!-- <li><a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
@@ -624,21 +626,21 @@
                                             </li>
                                         </ul>
                                     </li> -->
-                                    <li><a href="#">맞춤형 <i class="fi-rs-angle-down"></i></a>
+                                    <li><a href="/customizing">맞춤형 <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             
                                             <li><a href="page-contact.html">Contact</a></li>
                                             <li><a href="page-account.html">My Account</a></li>
-                                            <li><a href="page-login-register.html">login</a></li>
+                                            <li><a href="/login">login</a></li>
                                             <li><a href="page-login-register.html">register</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">마이페이지 <i class="fi-rs-angle-down"></i></a>
+                                    <li><a href="/mypage/member-info">마이페이지 <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             
                                             <li><a href="page-contact.html">Contact</a></li>
                                             <li><a href="page-account.html">My Account</a></li>
-                                            <li><a href="page-login-register.html">login/register</a></li>
+                                            <li><a href="/login">login/register</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -838,7 +840,7 @@
                                     <li><a href="page-about.html">About Us</a></li>
                                     <li><a href="page-contact.html">Contact</a></li>
                                     <li><a href="page-account.html">My Account</a></li>
-                                    <li><a href="page-login-register.html">login/register</a></li>
+                                    <li><a href="/login">login/register</a></li>
                                     <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
                                     <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
                                     <li><a href="page-terms.html">Terms of Service</a></li>
@@ -862,7 +864,7 @@
                         <a  href="page-contact.html"> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login-register.html">Log In / Sign Up </a>
+                        <a href="/">Log In / Sign Up </a>
                     </div>
                     <!-- <div class="single-mobile-header-info">
                         <a href="#">(+01) - 2345 - 6789 </a>
@@ -1034,8 +1036,26 @@
     <script src="assets/js/plugins/jquery.elevatezoom.js"></script>
     <!-- Template  JS -->
     <script src="./assets/js/main.js?v=3.3"></script>
+    
     <script src="./assets/js/shop.js?v=3.3"></script>
-
+   
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		let cateAddrass = /*[[${main}]]*/;
+		
+		if(cateAddrass=="main"){
+			 $("#cate-hb").css("display","block");
+		}else{
+			 $("#cate-hb").css("display","none");
+			 $("#cate-bt-hb").on("mouseover",function(){
+				  $("#cate-hb").css("display","block");
+			 })
+			 $("#cate-hb").on("mouseout",function(){
+				  $("#cate-hb").css("display","none");
+			 })
+		}
+		/*]]>*/
+	</script>
   
 </body>
 </th:block>
