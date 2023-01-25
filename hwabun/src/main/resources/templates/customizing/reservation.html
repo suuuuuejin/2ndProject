@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+   
+   <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> Pages
+                    <span></span> Login / Register
+                </div>
+            </div>
+        </div>
+        <section class="pt-150 pb-150 reserve-sec-hb">
+            <div class="container">
+				<div class="col-lg-10 m-auto flex-center-hb">
+	                <div class="col-lg-6">
+	                    <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
+	                        <div class="padding_eight_all bg-white">
+	                            <div class="heading_s1">
+	                                <h3 class="mb-30 top-blank-hb">&emsp;&emsp;&emsp;&emsp;맞춤형 화장품 컨설팅 예약</h3>
+	                            </div>
+	                            <p class="mb-50 font-sm reserve-text-hb">
+	                                1:1 토탈컨설팅입니다.<br/> 
+									설문지 제출 기한을 반드시 지켜주세요.<br/>
+									제출기한(예약일 2일전 )을 넘기면 설문지가 접수되지 않으며<br/> 
+									총액의 50%를 제외한 금액이 자동환불됩니다.<br/>
+									환불건이 발생하면  재고가 수시 복구됩니다.<br/>
+									구매 전 환불규정을 꼭 확인해 주세요.<br/>
+	                            </p>
+	                            <form action="/reservation" method="post">
+	                                <div class="form-group">
+	                                    <input type="datetime-local"  name="consulting_date" required> 
+	                                </div>
+	                                <div class="form-group pay-bt-hb flex-center-hb">
+	                                    <button type="submit" class="btn btn-fill-out btn-block hover-up" name="reservation">예약하기</button>
+	                                </div>
+	                            </form>
+
+	                        </div>
+	                    </div>
+	                </div>
+
+            	</div>
+            </div>
+        </section>
+    </main>
+   
+    
+    
+    
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+</html>

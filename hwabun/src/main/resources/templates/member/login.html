@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+	
+	<body>
+	<div class="container">
+   
+    
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-6">
+        <div class="content-main mt-80 mb-80 login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
+            <div class="padding_eight_all bg-white mx-auto">
+                <div class="heading_s1">
+                    <h3 class="mb-30">Login</h3>
+                </div>
+                <form method="post" action="login">
+                    <div class="form-group">
+                        <input type="text" required="" name="mb_id" placeholder="Your ID">
+                    </div>
+                    <div class="form-group">
+                        <input required="" type="password" name="mb_pw" placeholder="Password">
+                    </div>
+                    <div class="login_footer form-group">
+                        <div class="chek-form">
+                            <div class="custome-checkbox">
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+                                <label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
+                            </div>
+                        </div>
+                        <a class="text-muted" href="#">Forgot password?</a>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button> 
+                     
+                    </div>
+                    <input type="hidden" name="referrer" id="pre-url">
+                     	
+                </form>
+            </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</body>
+	
+	</th:block>
+	</th:block>
+	
+	
+	<script type="text/javascript">
+	
+	$.ajax({
+			
+			url : '/countBasket',
+			data : {
+			'count':'count'
+			},
+			
+			success : function(res){
+			// res --> 응답내용을 담는 변수
+			console.log(res);
+			console.log("success");
+			
+		},
+		error : function(){
+			console.log("error!error!error!");
+		}
+		
+		
+	
+	}).done(
+			
+	(data)=>{
+		
+	console.log(data);
+	
+	$('#countBasket').text(data);	
+		
+	}
+	);
+	
+	var referrer = document.referrer;
+	console.log(referrer);
+	$('#pre-url').val(referrer);
+	
+	
+	</script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		console.log("로그인 실패");
+		let loginFail = '[[${fail}]]';
+		console.log(loginFail);
+		
+		if(loginFail=='"아이디와 비밀번호를 다시 확인해 주세요"'){
+			alert(loginfail);
+		}
+	
+	/*]]>*/
+	</script>
+
+</html>

@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+	
+		<main class="main">
+	        
+	        <section class="cus-img-hb">
+	        	<h1 class="cus-h1-hb">당신의<br/>피부를<br/>진단하세요</h1><br/>
+	        	<p class="cus-p-hb">&nbsp피부 진단 MBTI<br/>&nbsp전문가와 1:1 컨설팅<p>
+	               
+	        </section>
+	        <section class="mt-50 mb-50 height-hb">
+	        	<div class="col-lg-12  flex-center-hb">
+               		<!-- 피부 진단 start --> 
+	                <div class="col-lg-4 col-md-4 card-container-hb">
+	                	<div class="card-hb">
+	                    	<!-- 카드 앞면 start -->
+							<div class="product-cart-wrap mb-30 card-side-hb front-hb">
+							    <div class="product-img-action-wrap">
+							        <div class="product-img product-img-zoom">
+							        	<img class="default-img card-img-hb" src="assets/imgs/customizing/customizing_main01.jpeg" alt="">
+							        </div>
+							    </div>
+							    <div class="product-content-wrap">
+							        <div class="textarea-hb">
+							            <span >피부 진단 테스트 </span>
+							        </div>
+							    </div>
+							</div>
+							<!-- 카드 앞면 end -->
+		
+	                    	<!-- 카드 뒷면 start -->
+	                         <div class="product-cart-wrap mb-30 card-side-hb back-hb">
+	                             <div class="product-img-action-wrap">
+	                                 <div class="product-img product-img-zoom flex-center-hb">
+	                                 	<a  onclick="testOnlymem()">
+											<img calss="icon-test-hb" src="assets/imgs/customizing/magnifying-glass.png" alt="">
+	                                 	</a>
+	                                 </div>
+	                             </div>
+	                             <div class="product-content-wrap textarea-hb">
+	                                 <h2><a onclick="testOnlymem()">피부 MBTI 진단하기</a></h2>		                                        
+	                             </div>
+	                         </div>
+	                         <!-- 카드 뒷면 end -->
+						</div>
+					</div>
+	                <!-- 피부 진단 end-->
+	                    
+	                 <!-- 카드 사이 공간 -->   
+	                <div class="col-lg-1"></div>
+
+					<!-- 1:1 맞춤형 start -->
+					<div class="col-lg-4 col-md-4 card-container-hb">
+						<div class="card-hb">
+							<!-- 카드 앞면 start-->
+							<div class="product-cart-wrap mb-30 card-side-hb front-hb">
+								<div class="product-img-action-wrap">
+									<div class="product-img product-img-zoom">
+										<img class="default-img card-img-hb" src="assets/imgs/customizing/customizing_main03.jpeg" alt="">
+									</div>
+								</div>
+								<div class="product-content-wrap">
+									<div class="textarea-hb">
+										<span>1 : 1 맞춤 화장품</span>
+									</div>
+								</div>
+							</div>
+							<!-- 카드 앞면 end -->
+
+							<!-- 카드 뒷면 start -->
+							<div class="product-cart-wrap mb-30 card-side-hb back-hb">
+								<div class="product-img-action-wrap">
+									<div class="product-img product-img-zoom flex-center-hb">
+										<a  onclick="reOnlymem()">
+											<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clipboard2-check" viewBox="0 0 16 16">
+											<path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+											<path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+											<path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3Z"/>
+											</svg>
+										</a>
+									</div>
+								</div>
+								<div class="product-content-wrap textarea-hb">
+									<h2><a  onclick='reOnlymem()'>상담 신청하기</a></h2>
+								</div>
+							</div>
+							<!-- 카드 뒷면 end -->
+						</div>
+					</div>
+					<!-- 1:1 맞춤형 end -->
+					
+					<div>
+
+
+					</div>
+				</div>
+			</section>
+		</main>
+    	
+	</th:block>
+	</th:block>
+	
+	
+	
+	
+	
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		
+		var member = /*[[${session.mvo}]]*/
+		
+		console.log("");
+    
+		function testOnlymem(){
+			if(member==null){
+			
+				alert("회원전용 서비스입니다.");
+				location.href="/login";
+			}else{
+				location.href="/skintest";
+			}
+		}
+    
+	
+		function reOnlymem(){
+			if(member==null){
+				alert("회원전용 서비스입니다.");
+				location.href="/login";
+			}else{
+				location.href="/reservation";
+			}
+		}
+    
+    /*]]>*/
+	</script> 
+	
+	
+
+	
+	
+	
+	
+</html>

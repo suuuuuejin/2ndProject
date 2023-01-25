@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.TestMapper"><!-- 인터페이스(클래스) 이름 적어줘야함!!!!!-->
+	
+	<!-- resultType : 리턴타입, parameterType : 인자 타입 -->
+	<select id = "getList" resultType="MemberDTO"><!-- id값은 mapper 메소드명과 같아야함 -->
+	  select * from members;
+	</select>
+	 
+</mapper>

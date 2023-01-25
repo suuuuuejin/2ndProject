@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+	 <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+	 	
+	 <main class="main">
+        <div class="page-header breadcrumb-wrap" >
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="main" rel="nofollow">Home</a>
+                    <span></span> 맞춤형
+                    <span></span> 피부 진단 테스트 결과 
+                </div>
+            </div>
+        </div>
+        
+        <section class="mt-50 mb-50 sec50-hb">
+            <div class="container">
+                <div class="row flex-center-hb">
+                	<div class="col-lg-9 cloud-hb">
+                		<h2 >[[${session.mvo.mb_nick}]]님의 피부 MBTI 결과</h2>                	
+                	</div>
+                    <div class="col-lg-12 flex-center-hb">
+						<div class="col-lg-10 col-md-4 skin-wrap-hb resultbox-hb" >
+							<div  class ="resultMBTI1-hb " th:style="'background-color:'+${mbti.mbti_color1}">
+                                <div class="result-textL-hb">[[${mbti.mbti}]]</div>
+                                <div class="result-textS-hb">[[${mbti.skin_simple}]]</div>
+                            </div>
+                
+                            <div class="resultMBTI2-hb">
+                                <!-- 차트 박스 start-->
+                                <div id="result-chart-hb" >
+            					</div>
+                                <!-- 차트 박스 end -->
+                                <div class="result-mbtibox-hb">
+                                    <div class="real-result-hb">
+                                        [[${mbti.skin_result}]]
+                                    </div>
+                                    <div class="result-briefing-hb">
+                                        <div class="result-part-hb">Strength</div>
+                                        <div class="result-content-hb">[[${mbti.skin_strength}]]</div>
+                                    </div>
+
+                                    <div class="result-briefing-hb">
+                                        <div class="result-part-hb">Weakness</div>
+                                        <div class="result-content-hb">[[${mbti.skin_weakness}]]</div>
+                                    </div>
+                                    <div class="result-briefing-hb">
+                                        <div class="result-part-hb">Solution</div>
+                                        <div class="result-content-hb" >[[${mbti.skin_solution}]]</div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+                        <!-- 상품 추천 공간 start-->
+                        <div class="col-lg-12 flex-center-hb mt-30" >
+							<div class="col-lg-9 col-md-12">
+						        <div class="row" >
+						            <div class="col" th:each="dr: ${dr}"  style="width:238px;height:355px;margin:0;">
+				                        <div class="product-cart-wrap pt-5" style="width:238px;height:355px;margin:0;">
+				                            <div class="product-img-action-wrap" >
+				                                <div class="product-img product-img-zoom" >
+				                                    <a href="shop-product-right.html">
+				                                        <img class="default-img" th:src="${dr.cos_photo1}" style="width:212px;height:282px;"alt="">
+				                                    </a>
+				                                </div>
+				                                <div class="product-action-1">
+				                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+				                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+				                                    <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+				                                </div>
+
+				                            </div>
+				                            <div class="product-content-wrap">
+				                                <div class="product-category">
+				                                    <a href="shop-grid-right.html" >[[${dr.gubun_name}]]</a>
+				                                </div>
+				                                <h2 style="height:41px"><a href="shop-product-right.html" >[[${dr.cos_name}]]</a></h2>
+				                            </div>
+				                        </div>
+				                    </div>
+						        </div>
+						    </div>
+                        </div>
+                        <div class="all-bt-hb">
+                            <button class="testclose-bt-hb"  onclick="cateGo()">구매하러가기</button>
+                            <button class="testclose-bt-hb"  onclick="cateGo()">소분하러가기</button>
+                        </div>	
+                        
+                        <!-- 상품 추천 공간 end -->
+						<div class="result-bt-hb">
+                            <div class=" detail-blind-hb">
+                                <div class="col-lg-10 col-md-4 mbti-center-hb margin-16-hb">
+                                    <div class="result-type-hb">유수분 밸런스</div>
+                                    <div id="content1" class = "mbti-content-hb">
+                                        <div class = "mbti-re1-hb"><P>D</P><p>Dry</p><P>건성</P></div>
+                                        <div class = "mbti-re2-hb">피지 분비과 수분 보유량<br>모두적어 거칠고<br>각질과 주름이 잘 생기는 타입</div>
+                                        <div class="mbti-bar-hb"><div th:style="|width:${(userSkin.oil+userSkin.water)*10}%|"></div><p>[[${(userSkin.oil+userSkin.water)*10}]]%</p></div>
+                                        <div class = "mbti-re2-hb">피지 분비량이 많아<br>번들거리고 여드름이<br>자주 생기는 타입</div>
+                                        <div class = "mbti-re1-hb"><P>O</P><p>Oily</p><P>지성</P></div>
+                                    </div>
+
+                                    <div class="result-type-hb">피부 민감도</div>
+                                    <div id="content2" class = "mbti-content-hb">
+                                        <div class = "mbti-re1-hb"><P>S</P><p>Sensitive</p><P>민감성</P></div>
+                                        <div class = "mbti-re2-hb ">피부가 얇고 섬세해<br>외부 자극에 쉽게 반응하는 타입</div>
+                                        <div class="mbti-bar-hb"><div th:style="|width:${(10-userSkin.trouble+userSkin.sensi)*10}%|"></div><p>[[${(10-userSkin.trouble+userSkin.sensi)*10}]]%</p></div>
+                                        <div class = "mbti-re2-hb">피부 장벽이 견고해<br>외부적인 스트레스에 대해<br>견디는 힘이 강한 타입</div>
+                                        <div class = "mbti-re1-hb"><P>R</P><p>Resistant</p><P>저항성</P></div>
+                                    </div>
+
+                                    <div class="result-type-hb">멜라닌 색소 활성도</div>
+                                    <div id="content3" class = "mbti-content-hb">
+                                        <div class = "mbti-re1-hb"><P>P</P><p>Pigment</p><P>색소성</P></div>
+                                        <div class = "mbti-re2-hb">멜라닌 활성도가 높아<br>기미, 주근깨 혹은 잡티 등<br>눈에 보이는 색소가 많은 타입</div>
+                                        <div class="mbti-bar-hb"><div th:style="|width:${(10-userSkin.color*2)*10}%|"></div><p>[[${(10-userSkin.color*2)*10}]]%</p></div>
+                                        <div class = "mbti-re2-hb line-2-hb">멜라닌 활성도가 낮아<br>눈에 보이는 색소가 적은 타입</div>
+                                        <div class = "mbti-re1-hb"><P>N</P><p>Non-Pigment</p><P>비색소성</P></div>
+                                    </div>
+                                    
+                                    <div class="result-type-hb">피부 탄력도 및 주름</div>
+                                    <div id="content4" class = "mbti-content-hb">
+                                        <div class = "mbti-re1-hb"><P>W</P><p>Wrinkle</p><P>주름</P></div>
+                                        <div class = "mbti-re2-hb line-2-hb">피부 결이 고르지 않고<br>주름이 많은 타입</div>
+                                        <div class="mbti-bar-hb"><div th:style="|width:${(10-userSkin.wrinkle*2)*10}%|"></div><p>[[${(10-userSkin.wrinkle*2)*10}]]%</p></div>
+                                        <div class = "mbti-re2-hb line-2-hb">피부 결이 고르고<br>주름이 적어 탄력이 있는 타입</div>
+                                        <div class = "mbti-re1-hb"><P>T</P><p>Tight</p><P>탱탱함</P></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all-bt-hb">
+                                <div class="detail-bt-hb" th:style="'background-color:'+${mbti.mbti_color1}" onclick="closeDetail()">진단 결과 상세 보기</div>
+                            </div>						 
+						</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- 차트 관련 script -->
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	console.log("~~~~~~")	
+    var r1 = '[[${userSkin.oil}]]'
+	console.log(r1);
+    var r2 = '[[${userSkin.water}]]'
+    var r3 = '[[${userSkin.color}]]'
+    var r4 = '[[${userSkin.wrinkle}]]'
+    var r5 = '[[${userSkin.trouble}]]'
+    var r6 = '[[${userSkin.sensi}]]'
+    console.log(r2);
+    console.log(r3);
+    console.log(r4);
+    console.log(r5);
+		
+    var dom = document.getElementById('result-chart-hb');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+    title: {
+    text: ''
+    },
+    legend: {
+    data: ['피부진단1', '피부진단2']
+    },
+    radar: {
+    // shape: 'circle',
+    indicator: [
+        { name: '유분', max: 5 },
+        { name: '수분', max: 5 },
+        { name: '색소', max: 5 },
+        { name: '주름', max: 5 },
+        { name: '트러블', max: 5 },
+        { name: '민감성', max: 5 }
+    ]
+    },
+    series: [
+    {
+        name: 'mySkin vs meanSkin',
+        type: 'radar',
+        data: [
+        {
+            value: [r1,r2, r3, r4,r5,r6],
+            name: 'mySkin'
+        },
+        {
+            value: [4.2, 2.7, 3.9, 4.1, 4.0 , 3.8],
+            name: 'meanSkin'
+        }
+        ]
+    }
+    
+    ]
+};
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+    
+    /*]]>*/  
+    </script>
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+    <script type="text/javascript">
+	
+        function closeDetail(){
+
+            if($(".detail-blind-hb").css("display")=="none"){
+                $(".detail-blind-hb").css("display","block");
+                $(".detail-bt-hb").text("진단 결과 접기");
+                $(".all-bt-hb").css("margin-top","100px")
+            }else{
+                $(".detail-blind-hb").css("display","none");
+                $(".detail-bt-hb").text("진단 결과 상세 보기");
+                $(".all-bt-hb").css("margin-top","50px")
+            }
+        }
+
+        
+        </script>
+
+
+</html>

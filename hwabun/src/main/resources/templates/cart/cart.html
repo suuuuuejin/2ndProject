@@ -1,0 +1,870 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+  <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="main" rel="nofollow">Home</a>
+                    <span></span> Shop
+                    <span></span> Your Cart
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">                                
+             
+                            <table class="table shopping-summery text-center clean">
+                                <thead>
+                                    <tr class="main-heading">
+                                    	<th scope="col"></th>
+                                        <th scope="col">사진</th>
+                                        <th scope="col">상품명</th>
+                                        <th scope="col">가격</th>
+                                        <th scope="col">수량</th>
+                                        <th scope="col">합계</th>
+                                        <th scope="col">장바구니 제거</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                            
+                                    
+                                    <tr th:each="row:${Basket}" class="Basket">
+                                      <td>
+                                      	<input checked class="check" type="checkbox" name="xxx" value="|check_${row.cos_seq}|" 
+                                     		 th:id="|check_${row.cos_seq}|" style="width:17px;height:17px">
+                                      </td>
+                                      <td class="image product-thumbnail"><img th:src="${row.cos_photo1}" alt="#">
+                                      </td>
+                                 
+                                       <td   class="product-des product-name">
+
+                                            <h5 class="product-name"><a href="shop-product-right.html"></a></h5>
+                                            <p class="font-xs" th:text="${row.cos_name}">상품이름<br>상품이름</p>
+                                            
+                                       </td>
+                                        
+                                                                     
+                                       <td th:id="|price_${row.cos_seq}|"class="price" data-title="Price" th:text="${#numbers.formatInteger(row.cos_price,0,'COMMA')}" ><span>1개의가격</span>
+                                       </td>    
+                                       <td class="text-center" data-title="Stock" >
+                                        
+                                       
+                                        
+                                       	 	<div style="position:relatve">
+                                                
+                                                
+                                                
+                                                <input style="visibility:hidden;display:inline-block;position:absolute;" th:value="${row.cos_seq}"/>
+                                                
+                                                <div style="display:inline-block;position:absolute;">
+	                                                <select  class="nine" th:id="|under_${row.cos_seq}|" 
+	                                                style="visibility:visible;text-align:center;text-align-last:center;top:10px;left:20px;width:55px;height:30px;border:solid;border-color:black;border-radius:2px;border-width:1px;margin-top:35px" >
+	   													 <option class="qty-option"  value="1"  style="width:20px;height:20px;">1</option>
+	   													 <option class="qty-option"  value="2"  style="width:20px;height:20px;">2</option>
+	   													 <option class="qty-option"  value="3"  style="width:20px;height:20px;">3</option>
+	   													 <option class="qty-option"  value="4"  style="width:20px;height:20px;">4</option>
+	   													 <option class="qty-option"  value="5"  style="width:20px;height:20px;">5</option>
+	   													 <option class="qty-option"  value="6"  style="width:20px;height:20px;">6</option>
+	   													 <option class="qty-option"  value="7"  style="width:20px;height:20px;">7</option>
+	   													 <option class="qty-option"  value="8"  style="width:20px;height:20px;">8</option>
+	   													 <option class="qty-option"  value="9"  style="width:20px;height:20px;">9</option>
+	   													 <option class="qty-option"  value="10+" style="width:20px">10+</option>
+													</select>
+												</div>
+											
+												<div style="display:inline-block;visibility:hidden;position:absolute;">
+													<input class="cnt" type="text" style="border:solid;border-width:1px;width:55px;height:30px;top:10px;margin-top:35px" th:id="|over_${row.cos_seq}|" th:value="${row.cnt}"></input>
+                                               	</div>
+                                              
+                                               	
+                                               
+                                   
+                                               	<button class='apply' style="width:45px;border-radius:2px;visibility:hidden;margin-top:70px;margin-left:5px;margin-bottom:0px;padding-bottom:0px;top:10px;left:10px;height:30px;background-color:green;color:white;" th:id="|btn_${row.cos_seq}|">적용</button>
+                                               	
+                                              
+                                                
+                                       
+                                       
+                                       		</div>
+                                        </td>
+                                        
+                                        <td  style="width:180px;"class="text-right eachsum" th:id="|eachsum_${row.cos_seq}|" data-title="Cart" th:text="${#numbers.formatInteger(row.price,0,'COMMA')}">
+                                            
+                                            <input th:id="|sum_${row.cos_seq}|" style="visibility:hidden" class="sum" th:value="${row.price}">
+                                            
+                                        </td>
+                                        
+                                        <td class="action" data-title="Remove">
+                                        
+                                        	<a href="#" class="throw">
+                                        	<img th:src="@{/assets/imgs/shop/dh_bin.png}" style="width:20px; height:20px;"/>
+                                        	<input th:class="cos_seq" type="hidden" th:value="${row.cos_seq}"/>
+                                        	<input th:class="_cnt" type="hidden" th:value="${row.cnt}"/>
+                                        	</a>
+                                        
+                                        
+                                        
+                                        </td>
+                                    
+                                    	<td class="text-right" data-title="Cart" th:id="cos_seq" th:value="${row.cos_seq}" >
+                                        	 <span></span>
+                                        </td>
+                                    
+                                    </tr>  
+                                   
+                                    <tr >
+                                        <td colspan="6" class="text-end" style="position:absolute;width:1280px;">
+                                        
+                                          <a href="#" class="text-muted" id="clear" > 
+                                         
+                                          <i class="fi-rs-cross-small"></i> 장바구니 모두 비우기
+                                          
+                                          </a>
+                                            
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                           	</table>
+  
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div >
+                                <div >
+                                    <table style="margin-top:20px">
+                                       <tbody>
+                                            <tr>
+                                            	<td style="text-align:center"><strong>총 상품금액</strong></td>
+                                                <td style="text-align:center;width:630px;font-size:20px" id="finalsum">총 상품금액</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a href="#$%&" onclick="purchase()" class="btn" style="float:right"> <i class="fi-rs-box-alt mr-10"></i>구매하러 가기</a>
+                                
+                                
+                                
+                        </div>
+                       
+                                <br>
+                    
+                     
+                        <div class="row mb-50">
+                            <div class="col-lg-6 col-md-12">
+             
+                                <div class="mb-30 mt-50">
+                    
+                                    <div class="total-amount">
+                                        <div class="left">
+                                            <div class="coupon">
+                                                <form action="#" target="_blank">
+                                                    <div class="form-row row justify-content-center">
+                                                  
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+  
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+	
+	
+	  
+    <script type="text/javascript">
+    
+    
+    $(document).ready(function(){   
+		
+    	
+    	
+    	
+    	var arr1=[];
+    	var arr2=[];
+    	var cosseqs=$('.cos_seq');
+    	var loop=cosseqs.length;
+    	
+    	for(var i = 0 ; i < cosseqs.length; i++){
+		
+    		
+    		arr1.push(cosseqs[i].value);
+    		
+    
+    	}    	
+    	
+		
+    	
+    	
+    	var cnts=$('._cnt');
+    	
+		for(var i = 0 ; i < cnts.length; i++){
+			
+			
+			arr2.push(cnts[i].value);
+			
+			
+			
+			
+		}
+		
+	
+		$(".check").attr(":checked",1); 	
+    	 	
+    	 	
+		
+		
+		for(var i=0;i<loop;i++){
+			
+			
+			if(arr2[i]<10){
+				
+			
+			var seq=arr1[i];
+			var cnt=arr2[i];
+			
+			$('#under_'+seq+' > option[value='+cnt+']').attr('selected',true);
+			
+			
+			
+			}else{
+				
+				var seq=arr1[i];
+				var cnt=arr2[i];
+				
+				$('#under_'+seq).css('visibility','hidden');
+				$('#over_'+seq).text(cnt);
+				$('#over_'+seq).css('visibility','visible');
+				$('#btn_'+seq).css('visibility','visible');
+					
+				
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////		
+		
+		var finalsum=parseInt(0);
+		var eachsum=$(".eachsum");
+		for(var i=0;i<eachsum.length;i++){
+		
+			finalsum+=parseInt(eachsum[i].innerText.replace(/,/g,''));
+			
+				
+		}
+		var c_finalsum=finalsum.toLocaleString('ko-KR');
+		$('#finalsum').text(c_finalsum);		
+		
+		
+	
+		
+		
+		
+		//ready ready ready ready 
+		
+		
+		$(".nine").click(function(){
+			
+			
+			var cnt=$(this).val();
+			
+			if(cnt=='10+'){
+				
+				
+	
+
+			$(this).css('visibility','hidden');
+			$(this).parent().next().find('input').css('visibility','visible');
+			$(this).parent().next().next().css('visibility','visible');
+			
+			
+			var over=parseInt(10);
+			
+			$(this).parent().next().find('input').val(over)
+			
+			
+			var price=$(this).parent().parent().parent().prev().text().replace(/,/g, "");;
+			
+			var eachsum=over*price;
+			
+			var c_eachsum=eachsum.toLocaleString('ko-KR');
+			
+			$(this).parent().parent().parent().next().text(c_eachsum);
+			
+	
+	////////////////////////////////////////////////////		
+			
+				
+					var check=$(this).parent().parent().parent().prev().prev().prev().prev().find('input').attr(":checked");
+					console.log(check);
+					
+					if(check==0){
+				
+						console.log("ninetenpluscheck");
+				
+						$('#finalsum')[0].innerText=$('#finalsum')[0].innerText-$(this).parent().parent().next()[0].innerText;
+						
+					}
+					else{
+			
+				
+			/////////////////////////////////////////////////////////////
+					var finalsum=parseInt(0);
+					var eachsum=$(".eachsum");
+					
+					var d_eachsum=eachsum.replace(/,/g, "");
+					
+					
+					for(var i=0;i<d_eachsum.length;i++){
+				
+						finalsum+=parseInt(d_eachsum[i].innerText);
+						
+					}
+					var c_finalsum=finalsum.toLocaleString('ko-KR');
+					$('#finalsum').text(c_finalsum);
+					
+				
+					}
+			
+			
+			
+			}
+			else{
+				
+				var cnt=$(this).val();
+				
+				var price=$(this).parent().parent().parent().prev().text().replace(/,/g, "");
+				
+				var eachsum=cnt*price;
+				
+				$(this).parent().next().find('input').text(cnt);
+				
+				var c_eachsum=eachsum.toLocaleString('ko-KR');
+				
+				$(this).parent().parent().parent().next().text(c_eachsum);
+				
+			/////////////////////////////////////////////////////////////////	
+				console.log("nineundertencheck")
+			
+					var check=$(this).parent().parent().parent().prev().prev().prev().prev().find('input').attr(":checked");
+					console.log(check);
+					
+					if(check==0){
+				
+						console.log("ninetenpluscheck");
+				
+						$('#finalsum')[0].innerText=($('#finalsum')[0].innerText.replace(/,/g,'')-$(this).parent().parent().next()[0].innerText.replace(/,/g,'')).toLocaleString('ko-KR');
+						
+					}
+					else{
+			
+				
+			/////////////////////////////////////////////////////////////
+					var finalsum=parseInt(0);
+					var eachsum=$(".eachsum");
+					
+					
+					for(var i=0;i<eachsum.length;i++){
+				
+						finalsum+=parseInt(eachsum[i].innerText.replace(/,/g,''));
+						
+					}
+					
+					
+					$('#finalsum').text(finalsum.toLocaleString('ko-KR'));
+				
+					}
+		///////////////////////////////////////////////////////////
+
+				$("#cnt").text(cnt);
+				var cos_seq=$(this).parent().prev().val();
+	        	
+			 	$.ajax({
+					
+					
+					url : '/changeCnt',
+					data : {
+
+					'cos_seq':cos_seq,
+					'cnt':cnt
+						
+						
+					},
+					
+				
+					success : function(res){
+					// res --> 응답내용을 담는 변수
+					console.log(res);
+					console.log("success");
+					
+				},
+				error : function(){
+					console.log("error!error!error!");
+				}
+
+				
+			});
+				
+				
+			}
+			
+			
+		})
+		//nine 끝
+		
+		//end 시작
+		
+		$(".apply").click(function(){
+			
+			
+			var overten=$(this).prev().find('input').val();
+			
+			
+			
+			if (Number.isInteger(+overten)){
+				
+		
+				if(overten>=1){
+					
+					
+					
+					
+					var cos_seq=$(this).prev().prev().prev().val();
+					
+					
+					var cnt=overten;
+					
+					
+					
+					var price=$(this).parent().parent().prev().text().replace(/,/g,'');
+				
+					var eachsum=cnt*price;
+				
+					
+					$(this).parent().parent().next().text(eachsum.toLocaleString('ko-KR'));	
+					
+					
+					var check=$(this).parent().parent().prev().prev().prev().prev().find('input').attr(':checked');
+				
+					if(check==1){
+				
+			
+					var finalsum=parseInt(0);
+					var eachsum=$(".eachsum");
+					
+					for(var i=0;i<eachsum.length;i++){
+				
+						finalsum+=parseInt(eachsum[i].innerText.replace(/,/g,''));
+						
+					}
+					
+					var c_finalsum=finalsum.toLocaleString('ko-KR');
+					$('#finalsum').text(c_finalsum);
+					}
+					
+					
+					
+					$.ajax({
+						
+						
+						url : '/changeCnt',
+						data : {
+
+						'cos_seq':cos_seq,
+						'cnt':cnt
+							
+							
+						},
+						
+					
+						success : function(res){
+						// res --> 응답내용을 담는 변수
+						console.log(res);
+						console.log("success");
+						
+					},
+					error : function(){
+						console.log("error!error!error!");
+					}
+
+					
+				});
+					
+					
+					
+		
+					
+				}
+				else{
+					
+					alert("1 이상의 정수여야 합니다.")
+					
+				}
+				
+				
+				
+			}else{
+				
+				
+				alert("숫자만 입력가능합니다");
+				
+			}
+			
+			
+			
+			//조건문 끝 
+			
+			
+		})
+        
+		
+		//end 끝
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+        //throw click 시작 
+        
+  
+    $(".throw").click(function(){
+      
+     
+      
+     var cos_seq=$(this).find('input[class=cos_seq]').val();
+    
+     //
+    
+ 
+     var check=$(this).parent().prev().prev().prev().prev().prev().prev().find('input').attr(':checked');
+ 	 
+    
+     if(check==1){
+ 		
+    	 $('#finalsum')[0].innerText=($('#finalsum')[0].innerText.replace(/,/g,"")-$(this).parent().prev()[0].innerText.replace(/,/g,"")).toLocaleString('ko-KR');
+ 		
+ 	}
+   
+ 	
+ 	
+     
+     $(this).parent().parent().empty();
+       
+       $.ajax({
+        		
+        		
+        		url : '/throwSeq',
+        		data : {
+
+        		'cos_seq':cos_seq
+        		
+        		},
+        		
+        		success : function(res){
+    			// res --> 응답내용을 담는 변수
+    			console.log(res);
+    			console.log("success");
+    			
+    		},
+    		error : function(){
+    			console.log("error!error!error!");
+    		}
+    		
+        	
+        		
+        });
+       
+       
+       
+
+       
+        
+		//ajax	
+			
+		
+		
+		
+		
+		
+    });
+        // throw click 끝
+        
+        
+        
+     
+       //clear click 시작 
+
+     $("#clear").click(function(){
+      
+    	 
+    	 var cos_seq=$(this).parent().parent().prev().find('a[class=throw]').find('input[class=cos_seq]');
+    	 
+    	 
+    	 
+			$('#finalsum').text(0);	
+			
+    	 $('#countBasket').text(0);
+    	 
+    	 $(".Basket").empty();
+     
+    
+   //
+			
+        
+   	$.ajax({
+        		
+        		
+        		url : '/clearBasket',
+        		data : {
+        			
+        			
+        		},
+        		
+        	
+        		success : function(res){
+    			// res --> 응답내용을 담는 변수
+    			console.log(res);
+    			console.log("success");
+    			
+    		},
+    		error : function(){
+    			console.log("error!error!error!");
+    		}
+    		
+        	
+        		
+        		
+        	
+        });
+   
+   
+   
+   
+   
+		//ajax	
+
+		
+		
+		
+		
+    });
+        
+        
+     //clear click 끝   
+        
+        
+ 
+        
+     //cntChange 시작 
+        
+
+     $(".changeCnt").click(function(){
+      
+     
+    	 
+   	var originprice=$(this).parent().prev().text().replace(/,/g, "");     
+        
+       
+ 	var cnt=$(this).prev().find("p").text();
+ 	
+ 	
+ 	
+ 	var total=(originprice*cnt).toLocaleString('ko-KR');
+    
+ 	$(this).parent().next().text(total);
+ 	
+ 	
+ 	var cos_seq=$(this).prev().eq(0).find('input').val();
+    	 
+       //
+ 	
+        	
+ 	$.ajax({
+		
+		
+		url : '/changeCnt',
+		data : {
+
+		'cos_seq':cos_seq,
+		'cnt':cnt
+			
+			
+		},
+		
+	
+		success : function(res){
+		// res --> 응답내용을 담는 변수
+		console.log(res);
+		console.log("success");
+		
+	},
+	error : function(){
+		console.log("error!error!error!");
+	}
+
+	
+});
+	//
+		
+    });
+        
+        
+ 
+       //changeCnt 끝 
+        
+       
+       //countBasket 시작 
+       
+       
+     
+     
+     $.ajax({
+ 		
+ 		url : '/countBasket',
+ 		data : {
+ 		'count':'count'
+ 		},
+ 		
+ 		success : function(res){
+ 		// res --> 응답내용을 담는 변수
+ 		console.log(res);
+ 		console.log("success");
+ 		
+ 	},
+ 	error : function(){
+ 		console.log("error!error!error!");
+ 	}
+ 	
+ 	
+
+ }).done(
+ 		
+ (data)=>{
+ 	
+ console.log(data);
+
+ $('#countBasket').text(data);	
+ 	
+ }
+ );
+        
+        
+        //countBasket 끝 
+        
+       
+        //check 시작
+        
+        
+     
+         $(".check").click(function(){
+        
+        
+        	
+        	 
+        	 	
+        	 	
+        	     	
+        	if($(this).attr(':checked')==1){
+        		
+        		$(this).attr(':checked',0);
+	      		$(this).attr('checked',false);
+	      		
+        		var k=$(this).parent().next().next().next().next().next()[0].innerText.replace(/,/g, "");
+        		$('#finalsum')[0].innerText=($('#finalsum')[0].innerText.replace(/,/g, "")-k).toLocaleString('ko-KR');
+        		
+        		
+        		
+        	}else{
+        		
+        		$(this).attr(':checked',1);
+        		$(this).attr('checked',true);
+        		
+        		var k=$(this).parent().next().next().next().next().next()[0].innerText.replace(/,/g, "");
+        		$('#finalsum')[0].innerText=(parseInt($('#finalsum')[0].innerText.replace(/,/g, ""))+parseInt(k)).toLocaleString('ko-KR');
+        		
+        		
+        	}
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        
+         })  
+        
+        //check 끝 
+        
+        
+        //goPurchase 시작
+        
+        
+       
+
+    });
+    
+    function purchase(){
+    	
+    	
+    	
+    	var pchase='';
+    	var purchases=$(".check");
+    	for(var i=0;i<purchases.length;i++){
+    		
+    		if(purchases[i].checked){
+    		
+    		pchase+=parseInt(purchases[i].id.split('_')[1])+',';
+    			}
+    		
+    		
+    		}
+    	pchase=pchase.substring(0, pchase.length - 1);
+    	
+		
+		    
+    	
+    	
+    	location.href="/willPurchase?pchase="+pchase;
+    	
+    	
+    }
+ 
+</script>
+    
+</html>
+

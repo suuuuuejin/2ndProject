@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Evara Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="assets/css/main_back.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="main" class="brand-wrap">
+                <img src="assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item">
+                    <a class="menu-link" href="/myaccount-order"> <i class="icon material-icons md-home"></i>
+                        <span class="text">주문 / 배송 조회</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/myaccount-info"> <i class="icon material-icons md-person"></i>
+                        <span class="text">개인정보수정</span>
+                    </a>
+               
+                </li>
+               
+                <li class="menu-item">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">맞춤 서비스 결과</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-account-login.html">User login</a>
+                        <a href="page-account-register.html">User registration</a>
+                        <a href="page-error-404.html">Error 404</a>
+                    </div>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/myaccount-reviews"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">내가 쓴 리뷰</span>
+                    </a>
+                </li>
+                
+                  <li class="menu-item">
+                    <a class="menu-link" href="/myaccount-recpurview"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">맞춤형 추천 리뷰쓰기</span>
+                    </a>
+                </li>
+                
+              
+            
+            </ul>
+        
+            <br>
+            <br>
+        </nav>
+    </aside>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <option value="Apple iphone">
+                        <option value="Ahmed Hassan">
+                    </datalist>
+                </form>
+            </div>
+          
+          
+          
+             <div class="col-nav">
+               
+                <ul class="nav">
+                    
+                    <li class="dropdown nav-item">
+                        
+                        
+                         <div class="header-action-icon-2" style="display:inline">
+                                    
+                               <a class="mini-cart-icon" data-bs-toggle="dropdown"href="/goBasket" aria-expanded="false" >
+                                    <img alt="Evara" src="assets/imgs/theme/icons/icon-cart.svg">
+                                    <span id="countBasket"  class="pro-count blue"></span>
+                               </a>
+
+						</div>
+                        
+                   
+                         <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" style="visibility:hidden" ></a>
+                        
+                    
+                    </li>
+                </ul>
+            </div>
+          
+          
+          
+          
+     
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </header>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">주문 내역</h2>
+                    <p>주문 아이디 ID: 3453012</p>
+                </div>
+            </div>
+            <div class="card">
+                <header class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+                           <!--  <span>
+                                <i class="material-icons md-calendar_today"></i> <b>수요일, 12월 14일, 2022, 10:34AM</b>
+                            </span> <br> -->
+                            <small class="text-muted">Order ID: 3453012</small>
+                        </div>
+                 <!--       <div class="col-lg-6 col-md-6 ms-auto text-md-end">
+                            <select class="form-select d-inline-block mb-lg-0 mb-15 mw-200">
+                                <option>Change status</option>
+                                <option>Awaiting payment</option>
+                                <option>Confirmed</option>
+                                <option>Shipped</option>
+                                <option>Delivered</option>
+                            </select>
+                            <a class="btn btn-primary" href="#">Save</a>
+                            <a class="btn btn-secondary print ms-2" href="#"><i class="icon material-icons md-print"></i></a>
+                        </div>-->  
+                    </div>
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="row mb-50 mt-20 order-info-wrap">
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-person"></i>
+                                </span>
+                                <div class="text">
+                                    <h6 class="mb-1">고객정보</h6>
+                                    <p class="mb-1">
+                                       이지은 <br> qwert@naver.com <br> 010-999-9999 
+                                    </p>
+                                    <!-- <a href="#">View profile</a> -->
+                                </div>
+                            </article>
+                        </div> <!-- col// -->
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-local_shipping"></i>
+                                </span>
+                                <div class="text">
+                                    <h6 class="mb-1">주문정보</h6>
+                                    <p class="mb-1">
+                                        운송사: 대한통운 <br> 결제정보: kb 국민카드 <br> 상태: 배송중
+                                    </p>
+                                    <!-- <a href="#">Download info</a> -->
+                                </div>
+                            </article>
+                        </div> <!-- col// -->
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-place"></i>
+                                </span>
+                                <div class="text">
+                                    <h6 class="mb-1">배송지</h6>
+                                    <p class="mb-1">
+                                        도시: 광주, 한국 <br>동구 제봉로 92 <br> 2층
+                                    </p>
+                                    <!-- <a href="#">View profile</a> -->
+                                </div>
+                            </article>
+                        </div> <!-- col// -->
+                    </div> <!-- row // -->
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="table" >
+                                <table class="table" style="width:90%">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%">주문일자</th>
+                                            <th width="20%">주문번호</th>
+  											<th width="20%" class="text-end">총액</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                        <tr th:each="rows:${orders}">
+                                            <td  th:text="${rows.order_date}" >
+                                             
+                                            </td>
+                                            
+                                            <td>    
+                                            	<a class="godetail" href="#%$&" >
+                                             	   <p th:text="${rows.order_seq}"/>
+                                                </a> 
+                                            </td>
+                                            
+                                            
+                                            
+                                            
+                                            <td class="text-end" th:text="${rows.total_amount}"> 
+                                            </td>
+                                            
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td colspan="4">
+                                                <article class="float-end">
+                                                    <dl class="dlist">
+                                                        <dt>상품 가격:</dt>
+                                                        <dd id="bprice"></dd>
+                                                    </dl>
+                                                    <dl class="dlist">
+                                                        <dt>배송비:</dt>
+                                                        <dd id="ship"></dd>
+                                                    </dl>
+                                                    <dl class="dlist">
+                                                        <dt>총 가격:</dt>
+                                                        <dd> <b class="h5" id="aprice"></b> </dd>
+                                                    </dl>
+                                                    <dl class="dlist">
+                                                        <dt class="text-muted">상태:</dt>
+                                                        <dd>
+                                                            <span class="badge rounded-pill alert-success text-success">Payment done</span>
+                                                        </dd>
+                                                    </dl>
+                                                </article>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                
+                                
+                                
+                                
+                                
+                          
+          
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            </div> <!-- table-responsive// -->
+                         <!--     <a class="btn btn-primary" href="page-orders-tracking.html">구매 정보 더보기</a>-->
+                        </div> <!-- col// -->
+                       
+                        <div class="col-lg-4" style="width:35%">
+						
+						
+						
+						
+						      <table class="table test" id="tablehidden" style="visibility:hidden;width:110%">
+       
+       								 <thead>
+       								 
+      								  	<tr>
+         								    <th style="text-align:center">상품명</th>
+         								   	<th>사진</th>
+       									    <th>수량</th>
+          									 <th>가격</th>
+           									 <th>합계</th>
+      									</tr>
+      									  
+									</thead>
+        								
+        							<tbody id="table">
+
+
+        							</tbody>
+
+    							</table>
+						
+						
+						
+						
+						
+                         
+                        </div> <!-- col// -->
+                    </div>
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Hwabun - 2nd Project .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+   
+    <!-- Main Script -->
+   
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+    
+    $(document).ready(function(){   
+    	
+    	$('.godetail').click(function(){
+    		
+    		$('#tablehidden').css('visibility','visible');
+    		
+    		$('#bprice').text($(this).parent().next()[0].innerText);
+    		$('#ship').text(3000);    		
+    		console.log($('#bprice'));
+    		console.log($('ship'));
+    		$('#aprice').text(parseInt($('#bprice')[0].innerText)+3000);
+    		
+    		
+    		var number=$(this)[0].innerText;
+    		
+		
+    		
+    		
+    		$.ajax({
+    			
+    			
+    			url : '/showDetail',
+    			data : {
+
+    			'number':number,
+    				
+    				
+    			
+    			datatype: JSON
+    			},
+    		
+    			success : function(res){
+    			// res --> 응답내용을 담는 변수
+    	$('#table').empty()	
+    	for(var i=0;i<JSON.parse(res).length;i++){
+    			
+    		
+    		
+    		var row='';
+				row+='<tr>';    				
+    			row+='<td>'+JSON.parse(res)[i].cos_name+'</td>';
+    			row+='<td>'+'<img src='+JSON.parse(res)[i].cos_photo1+' style="width:50px;height:50px"> </td>';
+    			row+='<td>'+JSON.parse(res)[i].cos_cnt+'</td>';
+    			row+='<td>'+JSON.parse(res)[i].cos_price+'</td>';
+    			row+='<td>'+JSON.parse(res)[i].price+'</td>';
+    			row+='</tr>';
+    		
+    		$('#table').append(row);
+    	
+    		
+    			
+    			
+    	}
+    	
+    			
+    			
+    			
+  
+    		},
+    		error : function(){
+    			console.log("error!error!error!");
+    		}
+
+    		
+    	})
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    	})
+    	
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.CateMapper"><!-- 인터페이스(클래스) 이름 적어줘야함!!!!!-->
+	
+	<!-- resultType : 리턴타입, parameterType : 인자 타입 -->
+
+	<select id = "getProductList" resultType="CosmeticsDTO" parameterType="String"><!-- id값은 mapper 메소드명과 같아야함 -->	  
+	  select *
+	 from cosmetics c, (select * from category where gubun_value = #{cate} and gubun_depth=1) d, (select cos_seq, avg(review_rating)as review_rating from reviews group by cos_seq ) a
+	 where c.cos_seq = d.cos_seq and a.cos_seq = c.cos_seq order by c.cos_likes desc;
+	</select>
+	<select id = "getProductList2" resultType="CosmeticsDTO" parameterType="String">
+	 select *
+		from cosmetics c, (select * from category where gubun_value =#{cate1} and gubun_depth=1) d, (select * from category where gubun_value = #{cate2} and gubun_depth=2) e, (select cos_seq, avg(review_rating) as review_rating from reviews group by cos_seq) f
+        where c.cos_seq = d.cos_seq
+		and d.cos_seq = e.cos_seq
+        and f.cos_seq = e.cos_seq
+		order by c.cos_likes desc;  
+	</select>
+	
+	<select id = "getCate" resultType = "CosmeticsDTO" parameterType="String">
+	  	select distinct gubun_value
+		from category 
+		where cos_seq in (select cos_seq from category where gubun_value=#{cate}) 
+		and gubun_depth=2;
+	</select>
+</mapper>

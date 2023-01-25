@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script> 
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+	<script th:inline="javascript">
+	let mbId;
+	let mbNick;
+
+	/*<![CDATA[*/
+	//별점 마킹 모듈 프로토타입으로 생성
+	function Rating(){};
+	Rating.prototype.rate = 0;
+	Rating.prototype.setRate = function(newrate){
+	    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
+	    this.rate = newrate;
+	    let items = document.querySelectorAll('.rate_radio');
+	    items.forEach(function(item, idx){
+	        if(idx < newrate){
+	            item.checked = true;
+	        }else{
+	            item.checked = false;
+	        }
+	    });
+	}
+	let rating = new Rating();//별점 인스턴스 생성
+	
+	document.addEventListener('DOMContentLoaded', function(){
+	    //별점선택 이벤트 리스너
+	    document.querySelector('.rating').addEventListener('click',function(e){
+	        let elem = e.target;
+	        if(elem.classList.contains('rate_radio')){
+	            rating.setRate(parseInt(elem.value));
+	        }
+	    })
+	});
+	/* 장바구니 */
+	function saveBasket(){
+		var cnt=$("#cnt").val();
+		console.log(cnt);
+		$.ajax({
+			
+			url : '/saveBasket',
+			data : {
+				
+
+				'cos_seq'  : '[[${cdto.cos_seq}]]',
+				'cnt': cnt
+			},
+			success : function(res){
+				$("#popup").css("visibility","visible");
+	    		$("#popupbox").css("visibility","visible");
+	    		setTimeout(() => $("#popup").css("visibility","hidden"), 3000);
+				
+	    		setTimeout(() => $("#popupbox").css("visibility","hidden"), 2700);
+	    		
+				// res --> 응답내용을 담는 변수
+			console.log("send success");	
+			},
+			error : function(){
+			console.log("error!");
+			}
+			
+			//ajax
+		}).done(
+				
+				(data)=>{
+			
+				console.log(data);
+				$('#countBasket').text(data);	
+				/*장바구니 개수*/
+				 $.ajax({
+						url : '/countBasket',
+						data : {
+						},
+						success : function(res){
+						// res --> 응답내용을 담는 변수
+						console.log(res);
+						console.log("success");
+					},
+						error : function(){
+						console.log("error!error!error!");
+					}
+					}).done(
+						
+						(data)=>{
+					
+						$('#countBasket').text(data);	
+					
+					}
+					);
+				
+				
+				  $("select[id=dropDownList]").click(function(){
+				    	
+				    	
+				    	console.log("클릭됨");
+				    	var cnt=$(this).val();
+				  
+				    	console.log(cnt);
+				    	
+				    	$("#cnt").val(cnt);
+				    	console.log($("#cnt").val());
+				    	
+				    })
+			}
+			);
+		}
+	/*document document documnet*/
+	/* 댓글 부분 */
+	$(document).ready(function(){
+		
+		mbId = $('#sesId').val();
+		mbNick = $('#sesNick').val();
+		loadList();
+		
+		/*장바구니 개수*/
+		 $.ajax({
+				url : '/countBasket',
+				data : {
+				'nickname':mbId
+				},
+				success : function(res){
+				// res --> 응답내용을 담는 변수
+				console.log(res);
+				console.log("success");
+			},
+				error : function(){
+				console.log("error!error!error!");
+			}
+			}).done(
+				
+				(data)=>{
+			
+
+
+				$('#countBasket').text(data);	
+			
+			}
+			);
+		
+		
+		  $("select[id=dropDownList]").click(function(){
+		    	var cnt=$(this).val();
+		       	$("#cnt").val(cnt);
+		    	
+		    })				
+	});	
+
+	// html 파싱순서( thymeleaf > javascript )
+	
+	/*댓글*/
+	function insertComment(){
+		var review_content = $('#review_content').val();
+		var review_rating = $('input:checkbox[name="review_rating"]:checked').length ;
+		var cos_seq = $('#cos_seq').val();
+		var mb_id = $('#mb_id').val();
+		var form =$('#review_photo');
+		var formData = new FormData(); 
+		 formData.append('review_content' , review_content);
+		 formData.append('review_rating' , review_rating);
+		 formData.append('cos_seq' , cos_seq);
+		 formData.append('mb_id' , mb_id);
+		 formData.append('files' , document.getElementById("review_photo").files[0]);
+  			/* var fData = $('#commentForm').serialize(); */
+			console.log("====폼내용");
+  	  		console.log(review_content);
+  	  		console.log(review_rating);
+  	  		console.log(cos_seq);
+  	  		console.log(mb_id);
+  	  		console.log(formData);
+  	  		console.log("====폼내용");
+  	  		$.ajax({
+  	  			url :"/commentWrite",
+  	  			type :"post",
+  	  			enctype: 'multipart/form-data',	// (파일보낼때필수) form data 설정
+  	  			data: formData,
+  	  			processData: false,	// (필수)  프로세스 데이터 설정 : false 값을 해야 form data로 인식
+  	  			contentType: false,	// (필수)  헤더의 Content-Type을 설정 : false 값을 해야 form data로 인식
+  	  			success : loadList,
+  	  			error : function(){alert("goInserterror");}
+  	  		});
+  	  		$('#commentForm').val("");
+  	  		$('#review_content').val("");
+  	  		
+	}   
+	/* 별점 체크 초기화 */
+	function initCheckbox()  {
+			  
+			  // 초기화할 checkbox 선택
+			  const checkboxes 
+			       = document.getElementsByName('review_rating');
+			  
+			  // 체크박스 목록을 순회하며 checked 값을 초기화
+			  checkboxes.forEach((checkbox) => {
+			    checkbox.checked = false;
+			  })
+			}
+	
+	function loadList(){
+		var num = '[[${cdto.cos_seq}]]';		
+		console.log(num)
+		$.ajax({
+			url : "/reviewList",
+			type : "get",
+			data : {"cos_seq" : num},
+			dataType : "json",
+			success : function(data){
+				var mvo = mbId;
+				console.log(mvo);
+				var comm = "";
+				$.each(data, function(index,rdto){
+					comm+= "<div class='single-comment justify-content-between d-flex' >";
+					comm+= "<div class='user justify-content-between d-flex'>";
+					comm+= "<div class='thumb text-center'>";
+					comm+= "<img src='"+rdto.mb_profile+"' alt=''>";
+					comm+= "<h6 >"+rdto.mb_nick+"</h6>";
+					comm+= "<p class='font-xxs' >Since 2012</p>";
+					comm+= "</div>";
+					comm+= "<div class='desc'>";
+					comm+= "<div class='product-rate d-inline-block'>";
+					comm+= "<div class='product-rating' style='width:"+rdto.review_rating*20+"%'>";
+					comm+= "</div> </div>";
+					if(rdto.review_photo!= null){
+					comm+= "<div class='img-size'><img src='files/"+rdto.review_photo+"'></img></div>"
+					}
+					comm+= "<p id='cmt"+rdto.review_seq+"'>"+rdto.review_content+"</p>";
+					comm+= "<p class='font-xs mr-30'>이 댓글이 "+rdto.review_likes+"명에게 도움이 됐어요 </p>";
+					
+					comm+= "<div class='d-flex justify-content-between'>";
+					comm+= "<div class='d-flex align-items-center'>";
+					comm+= "<p class='font-sm mr-30' >"+rdto.review_date+"</p>";
+					comm+= "<a href='#' class='list-filter size-filter font-small'> </a> </div> </div> </div></div> <div class='outer-div-hb'>";
+                   /* 로그인한 사람이랑 댓글쓴 사람이 다를 경우  */
+                 
+                   
+                   
+                   if(rdto.mb_id != mvo){
+                    comm+= "<div class='product-extra-link2'>";
+                    comm+= "<a id='a-like-hb"+rdto.review_seq+"' aria-label='Add To Wishlist' class='action-btn hover-up' href='javascript:goLike("+rdto.review_seq+");'><i id='like-hb"+rdto.review_seq+"' class='fi-rs-heart'></i></a></div>";
+                   }
+                    /* 로그인한 사람이 댓글 쓴 사람이면 */
+                    else if(rdto.mb_id == mvo){
+                    comm+= "<div class='inner-div-hb'>";
+                    comm+= "<ul class='list-filter size-filter font-small'>";
+                    		
+                    comm+= "<li id='cmtbtn"+rdto.review_seq+"'><a href='javascript:commUpdateForm("+rdto.review_seq+");'>수정</a></li><li id='commDelete"+rdto.review_seq+"'><a href='javascript:commDelete("+rdto.review_seq+");'>삭제</a></li></ul>";
+                    comm+="</div> ";
+                    }
+                   	comm+="</div></div>";
+				});
+				$('#commentTable').html(comm);
+			},
+			error: function(){alert("loadList 에러")}
+			
+		});
+		
+		initCheckbox();
+	}
+	function commUpdateForm(num){
+  		console.log("updateform"+num);
+  		$("#cmt"+num).html("<textarea id ='cmmUpdate' type='text' class='form-control' >"+$('#cmt'+num).text()+"</textarea>"
+  				);
+  		/* class='btn btn-outline-success w-100 */
+  		$("#cmtbtn"+num).html("<button type='button'  onclick='commUpdate("+num+")'>등록</button>");
+  		$("#cmtdeletebtn"+num).html("<button type='button'  onclick='updateCancel()'>취소</button>");	
+  		
+  	}
+  	function commUpdate(num){
+  		var content= $('#cmmUpdate').val();
+  		console.log(num,content)
+  		$.ajax({
+  			url : "/commentUpdate",
+  			type :"put",
+  			data :{"review_seq":num,"review_content":content},
+  			success : loadList,
+  			
+  			error : function(){alert("error");}
+  		});
+  	}
+  		function updateCancel(){
+  	  		loadList();
+  	  	}
+  	  	function commDelete(num){
+  	  		var del = confirm("댓글을 삭제하시겠습니까");
+  	  		if(del == true){
+  	  			$.ajax({
+  	  	  			url : "/commentDelete",
+  	  	  			type :"delete",
+  	  	  			data :{"review_seq":num},
+  	  	  			success : loadList,
+  	  	  			
+  	  	  			error : function(){alert("error");}
+  	  	  		});
+  	  		}else{
+  	  			return false;
+  	  		}
+  	  		
+  	  	}
+  	  function goLike(num){
+  			var mvo = mbId;
+    		if(mvo==null){
+    			alert("로그인후 이용가능 합니다.");
+    			return false;
+    		}else{
+    			$.ajax({
+    	  			url : "/like",
+    	  			type : "get",
+    	  			data : {"review_seq":num},
+    	  			success : function(data){
+    	  					console.log(data)
+    	  					/* $('#likes').text(item.likes); */
+    	  					if(data==0){
+    	  						$('#like-hb'+num).attr('class','fi-rs-heart');
+    	  					}else{
+    	  						$('#a-like-hb'+num).attr('class','a-like-hb');
+    	  						$('#like-hb'+num).css('color','red');
+    	  					}
+    	  					loadList();	
+    	  			},
+    	  			error :function(){alert("error");}
+    			});	
+    			
+    		}
+    	
+    	}
+  	  function productLike(num){
+  			var mvo = mbId;
+    		if(mvo==null){
+    			alert("로그인후 이용가능 합니다.");
+    			return false;
+    		}else{
+    			alert("찜목록에 상품을 담았습니다.")
+    			$.ajax({
+    	  			url : "/productLike",
+    	  			type : "get",
+    	  			data : {"review_seq":num,
+    	  					"mb_id" : mvo},
+    	  			success : function(data){
+    	  					console.log(data)
+    	  					/* $('#likes').text(item.likes); */
+    	  					if(data==0){
+    	  						$('#prdLike-hb'+num).attr('class','action-btn hover-up');
+    	  					}else{
+    	  						$('#prdLike-hb'+num).attr('class','action-btn hover-up a-like-hb');
+    	  						$('#p-like-hb'+num).css('color','red');
+    	  					}
+    	  					loadList();	
+    	  			},
+    	  			/* error :function(){alert("error");} */
+    			});	
+    			
+    		}
+    	
+    	}
+		/*]]>*/
+	</script>
+<!-- 여기서부터 작성 -->
+	<input id='sesId' type="hidden" th:if="${session.mvo != null}" th:value="${session.mvo.mb_id}">
+	<input id='sesNick' type="hidden" th:if="${session.mvo != null}" th:value="${session.mvo.mb_nick}">
+  <main >
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> 스킨케어
+                    <span></span> 토너
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-detail accordion-detail">
+                            <div class="row mb-50">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <!-- <div class="detail-gallery">
+                                        <span class="zoom-icon"><i class="fi-rs-search"></i></span> -->
+                                        <!-- MAIN SLIDES -->
+                                        <div class="product-image-slider">
+                                            <figure class="border-radius-10">
+                                                <img class="pdbg-color-hb" th:src="${cdto.cos_photo1}" alt="product image">
+                                            </figure>
+                                        </div>
+                                </div>
+                                <!-- 상품정보 -->
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-info">
+                                        <h2 class="title-detail" th:text="${cdto.cos_name}">상품명</h2>
+                                        <div class="product-detail-rating">
+                                            <div class="pro-details-brand">
+                                                <span th:text="${cdto.gubun_name}">브랜드명</span>
+                                            </div>
+                                            <div class="product-rate-cover text-end">
+                                                <div class="product-rate d-inline-block">
+                                                    <div class="product-rating" th:style="|width:${cdto.review_rating*20}%|">
+<!--                                                     <div class="product-rating" style="width:50%" th:attr="width=${cdto.review_rating*20}"> -->
+                                                    
+                                                    </div>  
+                                                </div>
+                                                <span class="font-small ml-5 text-muted"> [[${cdto.review_cnt}]] reviews</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix product-price-cover">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand" th:text="|${#numbers.formatInteger(cdto.cos_price, 0, 'COMMA')}원|">$120.00</span></ins>
+                                                <!-- <ins><span class="old-price font-md ml-15">$200.00</span></ins>
+                                                <span class="save-price  font-md color3 ml-15">25% Off</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                        <div class="short-desc mb-30">
+                                        </div>
+                                        <div class="product_sort_info font-xs mb-30">
+                                            <ul>
+                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
+                                                <li><i class="fi-rs-credit-card mr-5"></i> 배송 | 2,500원 </li>
+                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 만원 이상 무료배송 </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                        <div class="detail-extralink">
+                                          
+												<!-- 장바구니 담기 시작-->
+												<div id="popup" class="popup" style="visibility:hidden; border:solid;border-width:1px; max-width:220px;min-width:220px;max-height:120px;min-height:120px;left:40%; position:fixed;top:40%;
+                                            	padding:20px 20px 10px 10px;z-index:100;background-color:#FFFFFF;text-align:center">
+                                            	
+                                            		
+                                            		<label for="popup" style="max-height:35px;min-height:35px;max-width:200px;min-width:200px;font-weight:300px;" >상품이 장바구니에 담겼습니다.</label>
+                                            		
+                                            	
+                                            		
+    <button id="popupbox" class="popup" th:onclick="|location.href='@{/goBasket}'|" style="line-height:1px;max-height:40px;min-height:40px;max-width:150px;min-width:180px;background-color:#FFFFFF;border-color:#346AFF;margin: 0px 10px 10px 10px;color:#346AFF;font-weight:200px;padding:10px 10px 10px 10px;">장바구니 바로가기 ></button>              
+                                            		
+                                            	</div>
+                                            	
+                                            	<select name="form-control"  class="form-control" id="dropDownList" style="float:left;margin-right:5px ;width:45px;height:42px; appearance: normal; -webkit-appearance: normal; -moz-appearance: normal;" >
+   													 <option value="1" class="qty-val" selected="selected" >1</option>
+   													 <option value="2" class="qty-val" >2</option>
+   													 <option value="3" class="qty-val" >3</option>
+   													 <option value="4" class="qty-val" >4</option>
+   													 <option value="5" class="qty-val" >5</option>   
+   													 <option value="6" class="qty-val" >6</option>   
+   													 <option value="7" class="qty-val" >7</option>   
+   													 <option value="8" class="qty-val" >8</option>   
+   													 <option value="9" class="qty-val" >9</option>   
+   													 
+   													 													 
+												</select>
+												
+												<input type="hidden" id="cnt" value="1"> 
+												<!-- 장바구니 담기 코드 끝 -->
+												
+                                            <div class="product-extra-link2">
+                                                <button type="submit" class="button button-add-to-cart" onclick="saveBasket()">장바구니</button>
+                                                <a id="prdLike-hb" aria-label="Add To Wishlist" class="action-btn hover-up" th:onclick="productLike('${cdto.cos_seq')"><i id="p-like-hb" class="fi-rs-heart"></i></a>
+                                           
+                                            </div>
+                                        </div>
+                                        <ul class="product-meta font-xs color-grey mt-50">
+                                            <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                            <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
+                                           
+                                        </ul>
+                                    </div>
+                                    <!-- Detail Info -->
+                                </div>
+                                <!-- 상품정보 끝 -->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10 m-auto entry-main-content">
+                                  <!-- 상품 설명 -->
+                                    <h2 class="section-title style-1 mb-30">상품 설명</h2>
+                                    <div class="description mb-50">
+                                   <!-- 영역잡기 -->
+                                    <div class="row">
+  										  <div class="col">
+  										  </div>
+   									 <div class="col-8">
+                                    <img th:src="${cdto.cos_photo2}">
+                                    </div>
+								    <div class="col">
+								      
+								    </div>
+								  </div>
+								</div>
+								<!-- 상품 설명 끝 -->
+                                    <br>
+                                    <br> 
+                                    <h3 class="section-title style-1 mb-30 mt-30">댓글 ([[${cdto.review_cnt}]])</h3>
+                                    <!--댓글-->
+                                    <div class="comments-area style-2">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <h4 class="mb-30">고객 리뷰</h4>
+                                                <!-- 댓글목록 -->
+                                                <div id="commentTable" class="comment-list">
+                                                <!-- <div th:each="rdto : ${rdto}"> -->
+                                                <div class="single-comment justify-content-between d-flex" th:each="rdto : ${rdto}">
+                                                <form method="POST">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="thumb text-center">
+                                                                <img src="assets/imgs/page/avatar-6.jpg" alt="">
+                                                                <h6 th:text="${rdto.mb_nick}">닉네임</h6>
+                                                                <p class="font-xxs" >Since 2012</p>
+                                                            </div>
+                                                            <div class="desc">
+                                                                <div class="product-rate d-inline-block">
+                                                                    <div class="product-rating" th:style="|width:${rdto.review_rating*20}%|">
+                                                                    <!-- <div class="product-rating" style="width:20.0%"> -->
+                                                                    <!-- "+${rdto.review_rating}+"% -->
+                                                                    </div>
+                                                                </div>
+                                                                <p th:text="${rdto.review_content}">댓글내용</p>
+                                                                <p th:text="|리뷰 좋아요${rdto.review_likes}|"></p>
+                                                                <p th:text="|제품평점${rdto.review_rating}|"></p>
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <p class="font-xs mr-30" th:text="${#dates.format(rdto.review_date,'yyyy-MM-dd HH:mm')}">등록일자 </p>
+                                                                        <!-- <p class="font-xs mr-30" th:text="${#strings.substring(rdto.review_date,0,19)}">등록일자 </p>-->
+                                                                        <a href="#" class="list-filter size-filter font-small">좋아요 </a>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="outer-div-hb">
+                                                        <!-- 로그인한 사람이랑 댓글쓴 사람이 다를 경우 -->
+                                                        <div class="product-extra-link2" th:if = "${session.mvo != rdto.mb_id}">
+							                                 <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>        
+                                                       </div>
+                                                       <!-- 로그인한 사람이 댓글 쓴 사람이면 -->
+                                                        <div class="inner-div-hb" th:if = "${session.mvo == rdto.mb_id}">
+                                                        <ul class="list-filter size-filter font-small">
+                                                        		
+                                                            <li><a href="#">수정</a></li>
+                                                            <li><a href="#">삭제</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                                    </div>
+                                                    <!--single-comment -->
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-lg-4">
+                                                <h4 class="mb-30">고객 평점</h4>
+                                                <div class="d-flex mb-30">
+                                                    <div class="product-rate d-inline-block mr-15">
+                                                        <div class="product-rating" th:style="|width:${cdto.review_rating*20}%|">
+                                                        </div>
+                                                    </div>
+                                                    <h6 th:text="${#numbers.formatDecimal(cdto.review_rating,1,1)}">4.8 out of 5</h6>
+                                                </div>
+                                                <div class="progress" th:each="sdto : ${sdto}">
+                                                    <span th:text="|${sdto.review_range} star|">5 star</span>
+                                                    <div class="progress-bar" role="progressbar" th:style="|width:${sdto.percentage}%|" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" th:text=|${sdto.percentage}%|>50%</div>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    <!--댓글 작성-->
+ 											 <form th:if="${session.mvo!=null}" class="form-contact comment_form" id="commentForm" method="post" enctype="multipart/form-data">
+                                    <div class="comment-form">
+                                        <h4 class="mb-15">댓글</h4>
+                                        <!-- <div class="product-rating" style="width:4%">
+                                        </div> -->
+                                        <p class="title_star">별점과 리뷰를 남겨주세요.</p>
+ 											 <!-- DB에 넣을때 어떤 화장품에 쓴 댓글인지 같이 넣어아 하기 때문 -->
+ 											  <input type="hidden" id="cos_seq" name="cos_seq" th:value="${cdto.cos_seq}">
+									        <div class="review_rating">
+									            <!-- <div class="warning_msg">별점을 선택해 주세요.</div> -->
+									            <div class="rating">
+									                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+									                <input type="checkbox" name="review_rating" id="rating1" value="1" class="rate_radio" title="1점">
+									                <label for="rating1"></label>
+									                <input type="checkbox" name="review_rating" id="rating2" value="2" class="rate_radio" title="2점">
+									                <label for="rating2"></label>
+									                <input type="checkbox" name="review_rating" id="rating3" value="3" class="rate_radio" title="3점" >
+									                <label for="rating3"></label>
+									                <input type="checkbox" name="review_rating" id="rating4" value="4" class="rate_radio" title="4점">
+									                <label for="rating4"></label>
+									                <input type="checkbox" name="review_rating" id="rating5" value="5" class="rate_radio" title="5점">
+									                <label for="rating5"></label>
+									            </div>
+									        </div>
+                                            <div class="col-lg-82">
+                                                
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <textarea class="form-control w-100" name="review_comment" id="review_content" cols="30" rows="9" placeholder="댓글을 입력하세요"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="mb_id" id="mb_id" type="text" th:placeholder="${session.mvo!=null?session.mvo.mb_id:'아이디'}" th:value="${session.mvo!=null?session.mvo.mb_id:'아이디'}" readonly>
+<!--                                                                 <input class="form-control" name="mb_id" id="mb_id" type="text" th:placeholder="${session.mvo.mb_id!=null?session.mvo.mb_id:'아이디'}" readonly> -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <input class="form-control" name="mb_nick" id="mb_nick" type="text" th:placeholder="${session.mvo!=null?session.mvo.mb_nick:'아이디'}" th:value="${session.mvo!=null?session.mvo.mb_nick:'아이디'}" readonly>
+                                                            <!-- th:placeholder="${session.mvo.mb_nick?session.mvo.mb_nick:'닉네임'}"  -->
+                                                            </div>
+                                                        </div>
+                                                        <input type="file" id="review_photo">
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <button type="button" onclick="insertComment()" class="button button-contactForm">댓글 등록</button>
+<!--                                                         <button type="submit" class="button button-contactForm">댓글 등록</button> -->
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                                <h3 class="section-title style-1 mb-30">상품 정보</h3>
+                                    <table class="font-md mb-30">
+                                        <tbody>
+                                            <tr class="">
+                                                <th>제품 주요 사항    </th>
+                                                <td>
+                                                    <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <th class="w-25">사용기간(개봉 후 사용기간)</th>
+                                                <td>
+                                                    <p>제조 후 사용 기한 36개월(개봉 후 12개월)</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <th>제조국</th>
+                                                <td>
+                                                    <p>대한민국</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <th>화장품 성분</th>
+                                                <td>
+                                                    <p th:text=${cdto.cos_ingredient}>24</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="">
+                                                <th>사용시 주의사항</th>
+                                                <td>
+                                                    <p>가. 화장품 사용 시 또는 사용 후 직사광선에 의하여 사용부위가 붉은 반점, 부어오름 또는 가려움증 등의 이상 증상이나 부작용이 있는 경우에는 전문의 등과 상담할 것 나. 상처가 있는 부위 등에는 사용을 자제할 것 다. 보관 및 취급 시 주의 사항 1) 어린이의 손이 닿지 않는 곳에 보관할 것 2) 직사광선을 피해서 보관할 것</p>
+                                                </td>
+                                            </tr>
+                                            <tr class="width">
+                                                <th>품질 보증 기준</th>
+                                                <td>
+                                                    <p>본 상품에 이상이 있을 경우 공정거래위원회 고시 '소비자분쟁 해결기준'에 의해 보상해드립니다.</p>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="banner-img banner-big wow fadeIn f-none animated mt-50">
+                                <img class="border-radius-10" src="assets/imgs/banner/banner-4.png" alt="">
+                                <div class="banner-text">
+                                    <h4 class="mb-15 mt-40">Repair Services</h4>
+                                    <h2 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+ 
+    
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+	
+</html>

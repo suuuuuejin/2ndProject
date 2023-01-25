@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script> 	
+
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+	
+	
+<!-- 여기서부터 작성 -->
+   <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> Shop
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50 rank-sec-hb">
+            <div class="container">
+                <!-- 여기서 부터 랭킹 & 카테고리 추가적으로 클릭 후 그 페이지일때 버튼 색상 바뀌는거 구현 할것임 -->
+                <div class="rank-type-hb">
+                    <ul class="nav nav-tabs rank-type-ul-hb">
+                        <li class=" col-lg-2 col-md-4 mb-md-3 mb-lg-0 nav-item">
+                            <button class="nav-link rank-type-bt-hb" th:onclick = "location.href = 'rank_sales'">판매 랭킹</button>
+                        </li>
+                        <li class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 nav-item">
+                            <button class="nav-link rank-type-bt-hb" th:onclick = "location.href = 'rank_reviews'">리뷰 베스트</button>
+                        </li>
+                        <li class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 nav-item">
+                            <button class="nav-link rank-type-bt-hb" th:onclick = "location.href = 'rank_likes'">좋아요 랭킹</button>
+                        </li>
+                    </ul>
+                </div>
+                <section class="featured section-padding position-relative rank-cate-sec-hb">            
+                    <div class="container">
+                        <div class="row rank-cate-flex-hb">
+                            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 rank-cate-box-hb">
+                                <div class="banner-features wow fadeIn animated hover-up rank-cate-hb">
+                                    <button class="rank-cate-bt-hb" id="total" onclick = "getCateRank('전체')"><h4>전체</h4></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 rank-cate-box-hb">
+                                <div class="banner-features wow fadeIn animated hover-up rank-cate-hb">
+                                    <button class="rank-cate-bt-hb" id="skin" onclick = "getCateRank('스킨케어')"><h4>스킨케어</h4></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 rank-cate-box-hb">
+                                <div class="banner-features wow fadeIn animated hover-up rank-cate-hb">
+                                    <button class="rank-cate-bt-hb" id = "cleansing" onclick = "getCateRank('클렌징')"><h4>클렌징</h4></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 rank-cate-box-hb">
+                                <div class="banner-features wow fadeIn animated hover-up rank-cate-hb">
+                                    <button class="rank-cate-bt-hb" id = "suncare" onclick = "getCateRank('썬크림')"><h4>썬케어</h4></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0 rank-cate-box-hb">
+                                <div class="banner-features wow fadeIn animated hover-up rank-cate-hb">
+                                    <button class="rank-cate-bt-hb" id = "man" onclick = "getCateRank('남성')"><h4>남성</h4></button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+                <!-- 여기까지 랭킹 & 카테고리 -->
+                <div class="row" >
+                    <div class="col-lg-12">
+                        <div  class="row product-grid-3 rank-first" >
+                            <div  class="col-lg-3 col-md-4" th:each="list : ${list}">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a th:href="@{/productDetail(cos_seq=${list.cos_seq})}">
+                                                <img style="height:282px" class="default-img" th:src="${list.cos_photo1}" alt="">
+                                                <img style="height:282px" class="hover-img" th:src="${list.cos_photo1}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                            <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                <i class="fi-rs-search"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <span th:text="${list.gubun_name}"></span>
+                                        </div>
+                                        <h2 style="height:41px"><a href="shop-product-right.html" th:text="${list.cos_name}"></a></h2>
+                                        <div class="rating-result" title="90%"><div th:text="${list.review_rating}"></div>
+                                            <!-- <span>
+                                                <span>90%</span>
+                                            </span> -->
+                                        </div>
+                                        <div class="product-price">
+                                            <span th:text="${#numbers.formatInteger(list.cos_price, 3, 'COMMA') + '원'}"></span>
+                                        </div>
+                                        <div class="product-action-1 show">
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div id="rank-result" class="row product-grid-3 "></div>
+                            
+                        <!--pagination-->
+                        <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">16</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <
+            </div>
+        </section>
+    </main>
+    
+    
+    
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+	
+	
+	<script th:inline="javascript">
+	
+	function getCateRank(cateName){
+		var nowAddr = window.location.href; // localhost:8081/rank
+		console.log(nowAddr);
+		//"getProductList?cate=스킨케어"
+             $.ajax({
+                type : "POST",            // HTTP method type(GET, POST) 형식이다.
+                url : "rankCate",      // 컨트롤러에서 대기중인 URL 주소이다.
+                data : {"nowAddr":nowAddr,
+                	"cateName":cateName},       // Json 형식의 데이터이다.
+                dataType : "json",
+                success : rankList,
+                error : function(){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+            });
+	}
+	
+	function rankList(data){
+		console.log("여기왔니?")
+		var result="";
+
+		for(var i=0; i<data.length; i++){
+		
+			var price = data[i].cos_price;
+			price=price.toLocaleString();
+			
+		result+="<div class='col-lg-3 col-md-4'>"	
+		result+="<div class='product-cart-wrap mb-30'>";
+		result+="<div class='product-img-action-wrap'>";
+		result+="<div class='product-img product-img-zoom'>";
+		result+="<a href='/productDetail?cos_seq="+data[i].cos_seq+"'>";
+		result+="<img class='default-img' src="+data[i].cos_photo1+" alt=''>";
+		result+="<img class='hover-img' src="+data[i].cos_photo1+" alt=''></a></div>";
+		result+="<div class='product-action-1'>"
+		result+="<a aria-label='Quick view' class='action-btn hover-up' data-bs-toggle='modal' data-bs-target=''#quickViewModal'>";
+		result+="<i class='fi-rs-search'></i></a>";
+		result+="<a aria-label='Add To Wishlist' class='action-btn hover-up' href='shop-wishlist.html'>";
+		result+="<i class='fi-rs-heart'></i></a>";
+		result+="<a aria-label='Compare' class='action-btn hover-up' href='shop-compare.html'>";
+		result+="<i class='fi-rs-shuffle'></i></a></div>";
+		result+="<div class='product-badges product-badges-position product-badges-mrg'>";		
+		result+="<span class='hot'>Hot</span></div></div>";
+		result+="<div class='product-content-wrap'>";
+		result+="<div class='product-category'>";
+		result+="<span>"+data[i].gubun_name+"</span></div>";
+		result+="<h2><a href='shop-product-right.html'>"+ data[i].cos_name+"</a></h2>";
+		result+="<div class='rating-result' title='50%'><div>"+data[i].review_rating+"</div></div>";
+		result+="<div class='product-price'>";                                                                                
+		result+="<span>"+price+"원</span></div>";
+		result+="<div class='product-action-1 show'>";
+		result+="<a aria-label='Add To Cart' class='action-btn hover-up' href='shop-cart.html'>";
+		result+="<i class='fi-rs-shopping-bag-add'></i></a></div></div></div></div></div>";
+		
+		}
+		$('.rank-first').css("display","none");
+		$('#rank-result').html(result);
+		console.log("여기는 온거니?")
+	}
+	</script>
+</html>

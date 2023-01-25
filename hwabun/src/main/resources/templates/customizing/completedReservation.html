@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+   
+   <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> Pages
+                    <span></span> Login / Register
+                </div>
+            </div>
+        </div>
+        <section class="pt-150 pb-150 reserve-sec-hb">
+            <div class="container">
+				<div class="col-lg-10 m-auto flex-center-hb">
+	                <div class="col-lg-6">
+	                    <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
+	                        <div class="padding_eight_all bg-white">
+	                            <div class="heading_s1 ">
+	                                <h3 class="mb-30 top-blank-hb">예약완료 되었습니다</h3>
+	                                <h3 class="mb-30 middle-hb">감사합니다</h3>
+	                                <h5 class="mb-30 pay-text-hb">예약 상태는 마이 페이지에서 확인 가능합니다</h5>
+	                            </div>
+	                            
+	                                <div class="flex-center-hb">
+	                                    <button type="button" class="btn btn-fill-out btn-block hover-up pay-bt-hb" onclick='goMain()'>메인으로 가기</button>
+	                                </div>
+	                          
+	                        </div>
+	                    </div>
+	                </div>
+
+            	</div>
+            </div>
+        </section>
+    </main>
+   
+    
+    
+    
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+	<script type="text/javascript">
+	
+		function goMain(){
+			location.href="/main";
+		}
+	
+	</script>
+</html>

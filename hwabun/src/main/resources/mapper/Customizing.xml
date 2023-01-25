@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.CustomizingMapper">
+
+	<!-- 1:1 예약 -->
+	<insert id="reservation" parameterType="ConsultingDTO">	
+	insert into consulting(mb_id,consulting_date) 
+	values(#{mb_id},#{consulting_date})
+	</insert>
+
+	<!-- 피부진단 테스트 횟수 -->
+	<select id="testCount" parameterType="MemberDTO" resultType="int">
+	<!-- select 값 유무로 판단할수 있는 방법 없을땐 0 있을땐 1 출력 -->
+	select ifnull(max(skintest_cnt),0) from skintest_answer where mb_id=#{mb_id}
+	</select>
+	
+	<!-- 피부진단테스트 문제 -->
+	<select id="getQuestion" parameterType="HashMap" resultType="SkinTestQuestionDTO">
+	<!-- 클래스 생성하지 않은 파라미터 2개 이상 받을때 HashMap사용 -->
+	select * from skintest_question where que_seq between #{start} and #{end} order by que_num asc
+	</select>
+	
+	<!-- 특정 유형 성분 가져오기 -->
+	<select id="getTypeIngredients" parameterType="String" resultType="IngredientsDTO">
+	select * from ingredients where ingredient_type=#{ingredient_type}
+	</select>
+	
+	<!-- 사용자의 특이점 성분 저장 -->
+	<insert id="insertMemIngre" parameterType="MemberIngredientsDTO">
+	insert into member_ingredients (mb_id,ingredient_seq) values(#{mb_id}, #{ingredient_seq})
+	</insert>
+	
+	<!-- 피부진단 테스트 답변 저장 -->
+	<insert id="insertAnswer" parameterType="SkinTestAnswerDTO">
+	insert into skintest_answer (mb_id, que_seq, que_type, ans_value, skintest_cnt)
+	values (#{mb_id}, #{que_seq}, #{que_type}, #{ans_value}, #{skintest_cnt})
+	</insert>
+
+	<!-- 모든 피부mbti유형 가져오기 -->
+	<select id="getAllMbti" resultType="SkinMBTIDTO">
+	select * from skinMBTI
+	</select>
+	
+	<!-- 사용자의 피부진단 답변 최근 3회차의 특성값 평균 -->
+	<select id="getAnswerAvg" parameterType="String" resultType="SkinTestAnswerDTO">
+	select mb_id, que_type, avg(ans_value) ans_value
+	from skintest_answer
+	where mb_id=#{mb_id} and 
+		skintest_cnt between (select max(skintest_cnt) from  skintest_answer where mb_id=#{mb_id} )-2 
+		and (select max(skintest_cnt) from  skintest_answer where mb_id=#{mb_id})
+	group by que_type;
+	</select>
+	
+	
+	<!-- 사용자의 피부특성 값 저장 -->
+	<insert id="insertUserSkin" parameterType="UserSkinDTO">
+	insert into user_skin (mb_id, oil, water, color, wrinkle,  trouble, sensi, ingredient, reg_date, mbti)
+	values (#{mb_id}, #{oil}, #{water}, #{color}, #{wrinkle},  #{trouble}, #{sensi}, #{ingredient}, now(), #{mbti})
+	</insert>
+	
+	<!-- 사용자의 가장 최근 입력한 피부특성 값 가져오기 -->
+	<select id="getUserSkin" parameterType="String" resultType="UserSkinDTO">
+	select * from user_skin where mb_id=#{mb_id} order by reg_date desc limit 1
+	</select>
+	
+	<!-- 특정 mbti만 가져오기 -->
+	<select id="getUserMbti" parameterType="String" resultType="SkinMBTIDTO">
+	select * from skinMBTI where mbti=#{mbti}
+	</select>
+	
+	<!-- 모델연결전 임시 방편 -->
+	<select id="getRecommendationDR" resultType="CosmeticsDTO">
+	select * from cosmetics where cos_seq in(361,348,357,374)
+	</select>
+	
+	
+	<select id="getMeanSkin" resultType="UserSkinDTO">
+	select Avg(oil) oil, Avg(water) water, Avg(color) color, Avg(wrinkle) wrinkle, Avg(trouble) trouble, Avg(sensi) sensi
+	from user_skin 
+	</select>
+</mapper>

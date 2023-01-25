@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+<script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>  
+	<main class="main">
+		
+		
+		<section class="mt-50 mb-50  ">
+			<div class="col-lg-12">
+				<div class="row flex-center-hb">
+					<div class="col-lg-10 col-md-4 mbti-center-hb">	
+						
+						<div id="content1" class = "mbti-content-hb">
+							<div class = "mbti-con1-hb"><P>D</P><p>Dry</p><P>건성</P></div>
+							<div class="mbti-type-hb">유수분 밸런스</div>
+							<div class = "mbti-con1-hb"><P>O</P><p>Oily</p><P>지성</P></div>
+						</div>
+						
+						<div id="content2" class = "mbti-content-hb">
+							<div class = "mbti-con1-hb"><P>S</P><p>Sensitive</p><P>민감성</P></div>							
+							<div class="mbti-type-hb">피부 민감도</div>							
+							<div class = "mbti-con1-hb"><P>R</P><p>Resistant</p><P>저항성</P></div>
+						</div>
+						<div id="loading-page-hb" ></div>
+						
+						<div id="content3" class = "mbti-content-hb">
+							<div class = "mbti-con1-hb"><P>P</P><p>Pigment</p><P>색소성</P></div>							
+							<div class="mbti-type-hb">멜라닌 색소 활성도</div>							
+							<div class = "mbti-con1-hb"><P>N</P><p>Non-Pigment</p><P>비색소성</P></div>
+						</div>
+						
+						<div id="content4" class = "mbti-content-hb">
+							<div class = "mbti-con1-hb"><P>W</P><p>Wrinkle</p><P>주름</P></div>							
+							<div class="mbti-type-hb">피부 탄력도 및 주름</div>							
+							<div class = "mbti-con1-hb"><P>T</P><p>Tight</p><P>탱탱함</P></div>
+						</div>
+						
+					</div>
+
+					<div class="col-lg-10 col-md-4 loading-center-hb">	
+						<div th:each="mbti,i:${mbti}" th:class ="'skinMBTI-hb skinMBTI'+${i.count}+'-hb'" >
+							<div class="loading-textL-hb">[[${mbti.mbti}]]</div>
+							<div class="loading-textS-hb">[[${mbti.skin_simple}]]</div>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</section>
+
+
+	</main>
+	
+	
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+
+	<script type="text/javascript">
+		var loadingTime = 5000;	
+		var time = 170;
+		var shortTime = 100;
+		function typing(){
+			new TypeIt('#loading-page-hb')
+			.type('please wait for a moment...',{delay:1000})
+			.go()
+		}
+		// function opacity1(name){
+		// 	$(name).css('opacity','1')
+		// }
+		// function opacity01(name){
+		// 	$(name).css('opacity','0.4')
+		// }
+
+		// function skinMbti(name,time){
+		// 	setTimeout(opacity1(name),time);
+			
+		// }
+		// function skinMbtiOut(name,time){
+		// 	setTimeout(opacity01(name),time);
+		// }
+
+		$( document ).ready(function(){
+
+			typing();
+
+			setTimeout(function(){
+				$(".mbti-center-hb").css("display","none");
+				$(".loading-center-hb").css("display","flex");
+			},loadingTime);
+			
+			// skinMbti(".skinMBTI1-hb",loadingTime+500);
+			// skinMbtiOut(".skinMBTI1-hb",loadingTime+1000);
+
+
+
+			$(".skinMBTI1-hb").animate({opacity:'1'},7200,
+			()=>$(".skinMBTI1-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI2-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI2-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI3-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI3-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI4-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI4-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI8-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI8-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI12-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI12-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI16-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI16-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI15-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI15-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI14-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI14-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI13-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI13-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI9-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI9-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI5-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI5-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI6-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI6-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI7-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI7-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI11-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI11-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI10-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI10-hb").animate({opacity:'0.3'},time,
+			// 정상적
+			()=>$(".skinMBTI1-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI2-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI3-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI4-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI8-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI12-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI16-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI15-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI14-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI13-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI9-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI5-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI6-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI7-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI11-hb").animate({opacity:'1'},shortTime,
+			()=>$(".skinMBTI10-hb").animate({opacity:'1'},shortTime,
+			
+			()=>$(".skinMBTI-hb").animate({opacity:'0.3'},time,
+			()=>$(".skinMBTI-hb").animate({opacity:'1'},time,
+			()=>$(".skinMBTI-hb").animate({opacity:'0.5'},time,
+			()=>location.href="/result"
+			// 추가적
+			
+			))))))))))))))))))))
+			)))))))))))))))))))))))))))))));
+			
+		});
+		
+	</script>
+
+	
+
+</html>

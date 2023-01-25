@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.RankMapper"><!-- 인터페이스(클래스) 이름 적어줘야함!!!!!-->
+	
+	<!-- resultType : 리턴타입, parameterType : 인자 타입 -->
+	<select id = "getAllProduct" resultType="CosmeticsDTO"><!-- id값은 mapper 메소드명과 같아야함 -->
+	  select * from cosmetics;
+	</select>
+	 
+	 <select id = "getRankSales" resultType = "CosmeticsDTO">
+	 select * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_depth=1 order by cos_sales_cnt desc;
+	 </select>
+	 
+	 <select id = "getRankLikes" resultType = "CosmeticsDTO">
+	 select * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_depth=1 order by cos_likes desc;
+	 </select>
+	 
+	 <select id = "getRankReviews" resultType = "CosmeticsDTO">
+	 select * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_depth=1 order by review_rating desc;
+	 </select>
+	 
+	 <select id = "rank_sales" resultType = "CosmeticsDTO" parameterType="String">
+	 select distinct * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_value=#{cateName} and d.gubun_depth=1 order by cos_sales_cnt desc;
+	 </select>
+	 
+	 <select id = "rank_reviews" resultType = "CosmeticsDTO" parameterType="String">
+	 select distinct * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_value=#{cateName} and d.gubun_depth=1 order by review_rating desc;
+	 </select>
+	 
+	 <select id = "rank_likes" resultType = "CosmeticsDTO" parameterType="String">
+	 select distinct * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_value=#{cateName} and d.gubun_depth=1 order by cos_likes desc;
+	 </select>
+	 
+
+	 
+	<!--  <select id = "getRankReviews" resultType = "CosmeticsDTO" parameterType="HashMap">
+	 select * from cosmetics c left join category d on  c.cos_seq = d.cos_seq
+     left join (select (select Round(avg(review_rating),1) from dual) as review_rating , cos_seq from reviews group by cos_seq) as r
+on  c.cos_seq=r.cos_seq where d.gubun_value=#{ order by cos_sales_cnt desc;
+	 </select> -->
+	 
+</mapper>

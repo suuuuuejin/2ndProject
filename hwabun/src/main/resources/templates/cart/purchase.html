@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+	
+	
+		  <table class="table shopping-summery text-center clean">
+                                <thead>
+                                    <tr class="main-heading">
+                                    	
+                                        <th scope="col">사진</th>
+                                        <th scope="col">상품명</th>
+                                        <th scope="col">가격</th>
+                                        <th scope="col">수량</th>
+                                        <th scope="col">합계</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody> 
+ 									<tr th:each="row:${pitem}" class="Basket">
+ 										
+ 										<td><img th:src="${row.cos_photo1}"/></td>
+ 										<td><p th:text="${row.cos_name}"/></td>
+ 										<td><p th:text="${#numbers.formatInteger(row.cos_price,0,'COMMA')}"/></td>
+ 										<td><p th:text="${row.cnt}"/></td>
+ 										<td><p class="eachsum" th:text="${#numbers.formatInteger(row.price,0,'COMMA')}"></td>
+ 										
+ 										
+ 									</tr>                               
+                                </tbody>               
+                                
+	
+	
+		</table>
+	
+	
+	
+	    <table style="margin-top:20px">
+	    
+                                       <tbody>
+                                            <tr class="Basket">
+                                            	<td style="text-align:center"><strong>총 상품금액</strong></td>
+                                                <td style="text-align:center;width:630px;font-size:20px" id="finalsum">총 상품금액</td>
+                                            </tr>
+                                        </tbody>
+                                        
+       </table>
+                                    
+                                    
+                                    
+	 <div style="text-align:center">
+		 <p style="font-size:20px;text-align:center;margin:40px 20px" >구매가 완료되었습니다</p>
+	 	 <button type="button" style="margin:0px"class="btn btn-fill-out hover-up pay-bt-hb" onclick='Home()'>메인으로</button>
+	</div>
+	
+	</th:block>
+	</th:block>
+	
+<script type="text/javascript">
+	
+	 $(document).ready(function(){   
+	
+	var finalsum=parseInt(0);
+	var eachsum=$(".eachsum");
+	for(var i=0;i<eachsum.length;i++){
+	
+		finalsum+=parseInt(eachsum[i].innerText.replace(/,/g,''));
+		
+			
+	}
+	$('#finalsum').text(finalsum.toLocaleString('ko-KR'));		
+	
+	 $.ajax({
+	 		
+	 		url : '/countBasket',
+	 		data : {
+	 		'count':'count'
+	 		},
+	 		
+	 		success : function(res){
+	 		// res --> 응답내용을 담는 변수
+	 		console.log(res);
+	 		console.log("success");
+	 		
+	 	},
+	 	error : function(){
+	 		console.log("error!error!error!");
+	 	}
+	 	
+	 	
+
+	 }).done(
+	 		
+	 (data)=>{
+	 	
+	 console.log(data);
+
+	 $('#countBasket').text(data);	
+	 	
+	 }
+	 );
+	
+	
+	 })
+	 
+	 
+ function Home(){
+    	location.href = "/main";
+    }
+	 
+	 
+	 
+	</script>
+
+
+
+
+

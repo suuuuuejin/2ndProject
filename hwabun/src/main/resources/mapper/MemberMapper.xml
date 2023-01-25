@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.MemberMapper">
+	
+	<!-- 회원가입 때 아이디 중복체크 -->
+	<select id="idCheck" resultType="MemberDTO">
+		select * from members
+		where mb_id=#{mb_id}
+	</select>
+	
+	<!-- 가입 -->
+	<insert id="register" parameterType="MemberDTO">
+		insert into members(mb_id, mb_pw, mb_name, mb_birthdate, mb_gender, mb_nick, mb_post, mb_addr1, mb_addr2,mb_joindate )
+		values(#{mb_id}, #{mb_pw}, #{mb_name}, #{mb_birthdate}, #{mb_gender}, #{mb_nick}, #{mb_post}, #{mb_addr1}, #{mb_addr2}, now())
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="getMemInfo" parameterType="MemberDTO" resultType="MemberDTO">
+		select * from members
+		where mb_id=#{mb_id} and mb_pw=#{mb_pw}
+	</select>
+
+</mapper>

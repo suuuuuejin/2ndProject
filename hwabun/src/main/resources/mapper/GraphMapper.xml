@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.GraphMapper"><!-- 인터페이스(클래스) 이름 적어줘야함!!!!!-->
+	
+	<!-- resultType : 리턴타입, parameterType : 인자 타입 -->
+	<select id = "getMbtiGraph" resultType="UserSkinDTO">
+	  select * from user_skin where mb_id=#{mb_id};
+	</select>
+	<select id = "getSameMbtiGraph" resultType="CosmeticsDTO">
+	  select d.cos_type, (d.percent * 100 / sum(percent) over()) as percent
+		from (select r.cos_type, sum(r.cnt) as percent from  (select cos_type, count(cos_type) as cnt from cosmetics where cos_seq in 
+		(select cos_seq from order_detail where order_seq in (select max(order_seq) from orders where mb_id in
+ 		(select distinct mb_id from user_skin where mbti=(select mbti from user_skin where mb_id=#{mb_id} order by reg_date desc limit 1)) group by mb_id)) group by cos_type) as r group by cos_type) as d
+		group by d.cos_type;
+	</select>
+	<select id = "getSameMbtiProduct" resultType="CosmeticsDTO">
+	  select * 
+	  from cosmetics c, (select cos_seq, avg(review_rating) as review_rating from reviews group by cos_seq ) a , category g
+	  where g.cos_seq=c.cos_seq and g.gubun_depth = 1 and a.cos_seq = c.cos_seq and c.cos_seq in (select cos_seq from order_detail where order_seq in (select max(order_seq) from orders where mb_id in
+ (select distinct mb_id from user_skin where mbti=(select mbti from user_skin where mb_id=#{mb_id} order by reg_date desc limit 1)) group by mb_id) ) ;
+ </select> 
+ 
+ <select id ="getTwProduct" resultType="CosmeticsDTO">
+ 	select * from cosmetics where cos_seq in(select cos_seq from cosmetic_counts where mb_id in (select mb_id from members where (select year(mb_birthdate)) between 1995 and 2003));
+ </select>
+ <select id ="getThProduct" resultType="CosmeticsDTO">
+ 	select * from cosmetics where cos_seq in(select cos_seq from cosmetic_counts where mb_id in (select mb_id from members where (select year(mb_birthdate)) between 1983 and 1994));
+ </select>
+</mapper>

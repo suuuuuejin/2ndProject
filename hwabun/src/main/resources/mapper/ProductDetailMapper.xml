@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.gjai.hwabun.mapper.ProductDetailMapper"><!-- 인터페이스(클래스) 이름 적어줘야함!!!!!-->
+	
+	<!-- resultType : 리턴타입, parameterType : 인자 타입 -->
+	<select id = "getProduct" resultType="CosmeticsDTO"><!-- id값은 mapper 메소드명과 같아야함 -->
+		select c.*, t.gubun_name, (select count(cos_seq) from reviews where cos_seq=#{cos_seq} group by cos_seq)as review_cnt, (select avg(review_rating) from reviews where cos_seq=#{cos_seq}) as review_rating  
+		from cosmetics c, category t 
+		where c.cos_seq=t.cos_seq and c.cos_seq=#{cos_seq} and t.gubun_depth=1;
+	</select>
+	<!-- SELECT date_format(datetime, '%Y-%m-%d') as  FROM `sandbox2` WHERE id=1; -->
+	<select id = "getReviews" resultType="ReviewDTO"><!-- id값은 mapper 메소드명과 같아야함 -->
+		select r.review_seq, r.cos_seq, r.review_content,r.mb_id, r.review_rating, r.review_likes,r.review_photo, date_format(r.review_date, '%Y-%m-%d-%T') as review_date, m.mb_nick, m.mb_profile  
+		from reviews r, members m 
+		where m.mb_id=r.mb_id and cos_seq=#{cos_seq};
+	</select>
+	<select id = "getStars" resultType="StarDTO"><!-- id값은 mapper 메소드명과 같아야함 -->
+		select r.review_range, r.review_cnt, (round( r.review_cnt/(select count(review_rating) from reviews where cos_seq=#{cos_seq})  * 100 )) AS percentage  
+		from (select review_rating as review_range, count(*) as review_cnt, count(review_rating) as total_cnt from reviews where cos_seq=#{cos_seq} group by review_rating order by review_range desc) as r;
+	</select>
+	<insert id="insertReview" parameterType="ReviewDTO">
+		insert into reviews(cos_seq, review_content, mb_id, review_rating, review_photo) 
+		values(#{cos_seq},#{review_content}, #{mb_id},#{review_rating},#{review_photo});
+	</insert> 
+	<insert id="cInsertReview" parameterType="ReviewDTO">
+		insert into reviews(cos_seq, review_content, mb_id, review_rating) 
+		values(#{cos_seq},#{review_content}, #{mb_id},#{review_rating});
+	</insert> 
+	<update id="updateReview" parameterType="ReviewDTO">
+		update reviews set review_content=#{review_content} where review_seq=#{review_seq};
+	</update> 
+	<delete id="deleteReview">
+		delete from reviews where review_seq=#{review_seq};
+	</delete>
+
+	<insert id="registerEvent" parameterType="EventDTO">
+		insert into event_table(event_time, event_type, cos_seq, user_id, user_session, admin_id)
+		values (NOW(), 1, #{cos_seq}, #{user_id}, #{user_session}, 'op')
+	</insert>
+	<update id="like" parameterType="int" >
+		update reviews set review_likes=review_likes+1 where review_seq=#{review_seq}; 
+	</update>
+	<select id ="likeCheck" parameterType="reviewDTO" resultType="int">
+ 		select count(*) from cosmetic_counts where cos_seq = #{cos_seq} and mb_id =#{mb_id};
+ 	</select>
+
+</mapper>

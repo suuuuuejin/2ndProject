@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+<!-- 여기서부터 작성 -->
+
+	
+	<main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="main" rel="nofollow">Home</a>
+                    <span></span> 맞춤형
+                    <span></span> 피부 진단 테스트
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50 ">
+
+			<form action="/skintest" method="post">
+
+				<!-- test시작 start -->
+		        <div id="test0-hb" class="col-lg-12">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="start-num-hb">
+		                            <div class="start-numfont-hb">0</div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb">워밍업</p>
+		                        </div> 
+		                        <div class="start-imgbox-hb" >
+		                            <img src="assets/imgs/customizing/medical-records.png"  alt="">
+		                        </div>
+		                        <div class="test-start-hb">
+		                            <p class="start-text-hb">피부 진단을 시작하겠습니다</p>
+		                        	<button type="button" class="btn btn-primary start-bt-hb" onclick='nextPage(0)' >시작하기</button>
+		                        </div>
+		                        
+		                        
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- test시작 end -->
+
+ 
+				<!-- 질문 box start -->
+ 		     	<div th:each="que, i:${que}" th:id="'test'+${que.que_num}+'-hb'" class="col-lg-12 testbox-hb">
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 ">
+		                        <div class="test-num-hb">
+		                            <div class="test-numfont-hb">[[${que.que_num}]] /[[${i.size}]] </div>
+		                        </div>
+		                        <div class="flex-center-hb">
+		                            <p class="test-text-hb" >[[${que.que_type}]]</p>
+		                        </div> 
+		                        <div class="test-imgbox-hb" >
+		                        	<div class="before-hb">
+		                        		<img src="assets/imgs/customizing/back.png" class="change-bt-hb"  th:pageNum="${que.que_num}" th:onclick="beforePage(this.getAttribute('pageNum'))">
+		                            </div>
+		                            <div class="icon-box-hb">
+		                            	<img th:src="'assets/imgs/customizing/'+${que.que_img}" class="icon-hb" >
+		                            </div>
+		                            <div class="next-hb">
+		                            	<img src="assets/imgs/customizing/preview.png" class="change-bt-hb" th:pageNum="${que.que_num}" th:onclick="previewPage(this.getAttribute('pageNum'))" >
+		                        	</div>
+		                        </div>
+		                        <div class="testquestion-hb">
+		                            <p class="testquestion-text-hb">[[${que.que_content}]]</p>
+		                        </div>
+
+		                        
+								 <div class="choice-hb">
+								 	<input type="hidden" th:name="|ansList[${i.index}].mb_id|" th:value="${session.mvo.mb_id}">
+								 	<input type="hidden" th:name="|ansList[${i.index}].que_seq|" th:value="${que.que_seq}">
+								 	<input type="hidden" th:name="|ansList[${i.index}].que_type|" th:value="${que.que_type}">
+								 	<input type="hidden" th:name="|ansList[${i.index}].skintest_cnt|" th:value="${skintest_cnt+1}">
+		                            <input type="radio" th:name="|ansList[${i.index}].ans_value|" class="radio-hb choice-raL-hb" th:id="${que.que_num}+'_1'" value="1" th:pageNum="${que.que_num}" th:onclick="nextPage(this.getAttribute('pageNum'))"> 
+		                            <input type="radio" th:name="|ansList[${i.index}].ans_value|" class="radio-hb choice-raM-hb" th:id="${que.que_num}+'_2'" value="2" th:pageNum="${que.que_num}" th:onclick="nextPage(this.getAttribute('pageNum'))"> 
+		                            <input type="radio" th:name="|ansList[${i.index}].ans_value|" class="radio-hb choice-raS-hb" th:id="${que.que_num}+'_3'" value="3" th:pageNum="${que.que_num}" th:onclick="nextPage(this.getAttribute('pageNum'))"> 
+		                            <input type="radio" th:name="|ansList[${i.index}].ans_value|" class="radio-hb choice-raM-hb" th:id="${que.que_num}+'_4'" value="4" th:pageNum="${que.que_num}" th:onclick="nextPage(this.getAttribute('pageNum'))"> 
+		                            <input type="radio" th:name="|ansList[${i.index}].ans_value|" class="radio-hb choice-raL-hb" th:id="${que.que_num}+'_5'" value="5" th:pageNum="${que.que_num}" th:onclick="nextPage(this.getAttribute('pageNum'))"> 
+		                        </div> 
+		                        
+		                       
+		                        <div class="choice-range-hb">
+		                            <div class="choice-textL-hb">
+		                            	<p class="textS-hb">&nbsp;매우 아니다</p>
+		                            </div>
+		                            <div class="choice-textR-hb">
+		                            	<P class="textS-hb">&emsp;&emsp;매우 그렇다</P> 
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 질문box end -->
+	        	
+	        	<!-- 알러지 성분 start -->
+		       <div  th:id="'test'+${#lists.size(que)+1}+'-hb'" class="col-lg-12 testbox-hb">
+		            <!-- <div  th:id="'test'+${#lists.size(que)+1}+'-hb'" class="col-lg-12 "> -->
+		            <div class="row flex-center-hb">
+		                <div class="col-lg-10 col-md-4 test-flex-hb">
+		                    <div class="skin-wrap-hb mb-30 flex-center-hb">
+		                  		<div th:each="ingre:${ingre}" class= "check-size-hb " >
+			                    	<input type="checkbox" name="ingre" class="checkbox-hb " th:id="'17_'+${ingre.ingredient_seq}" th:value="${ingre.ingredient_seq}">
+			                    	<label th:for="'17_'+${ingre.ingredient_seq}" class="checklabel-hb">[[${ingre.ingredient_name}]]</label>
+			                    </div>
+			                    <div class="flex-center-hb finish-box-hb">
+				                    <button class="testclose-bt-hb ingredient-hb" onclick="ingredient()">알러지 성분 보기</button>
+				                    <button type="submit" class="testclose-bt-hb" >결과보기</button>
+			                    </div>			                    			 
+			               		
+		                    </div>
+		                </div>
+		            </div> 
+		        </div>
+	        	<!-- 알러지 성분 end -->
+	        	
+	        	
+	        	
+	    </form>
+	    
+	   </section>
+	   </main>   	
+	        	
+	        	
+	        	
+	        	
+<!-- 여기까지 입력 -->
+	</th:block>
+	</th:block>
+	
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	
+	function nextPage(page){
+		page *=1; // js page가 string으로 넘어오는거 숫자로 형변환
+
+		//시간 조절 함수
+		setTimeout(function(){
+			
+			// 현재 페이지 닫기 
+			$('#test'+page+'-hb').css("display","none");
+
+			// 다음 페이지 열기
+			page = page+1 ;
+			$('#test'+page+'-hb').css("display","block");
+					
+		},200);	
+
+
+
+	};
+	
+	function beforePage(page){
+		page *=1; // js page가 string으로 넘어오는거 숫자로 형변환
+		
+		// 현재 페이지 닫기
+		$('#test'+page+'-hb').css("display","none");
+
+		// 이전 페이지 열기
+		page = page-1 ;
+		$('#test'+page+'-hb').css("display","block");
+		
+	};
+
+	function previewPage(page){
+		page *=1; // js page가 string으로 넘어오는거 숫자로 형변환
+		
+		// 현재 페이지 닫기
+		$('#test'+page+'-hb').css("display","none");
+		
+		// 다음 페이지 열기
+		page = page+1 ;
+		$('#test'+page+'-hb').css("display","block");
+		
+	};
+	
+	function ingredient(){
+
+		$(".check-size-hb").css("display","flex");
+		$(".ingredient-hb").css("display","none");
+		$(".finish-box-hb").css("margin-top","20px");
+		$(".finish-box-hb").css("margin-bottom","50px");
+
+	}
+
+
+
+	/*]]>*/
+	</script>
+
+	
+</html>
