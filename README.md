@@ -18,7 +18,7 @@
 <br>
 <br>
 ## 🖥️ 화면 구성
-    ![화면구성](https://user-images.githubusercontent.com/108103279/213904536-e2345348-96e7-4de1-8b53-d3fd035f6abf.png)
+![화면구성](https://user-images.githubusercontent.com/108103279/213904536-e2345348-96e7-4de1-8b53-d3fd035f6abf.png)
 
 ## ✨ 주요 기능
 
